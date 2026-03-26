@@ -11,7 +11,7 @@
       --accent: #f97316;
       --bg: #ffffff;
       --soft: #f8fafc;
-      --headline-light: #f3f4f6;
+      --headline-light: #94a3b8;
       --text: #0f172a;
       --muted: #64748b;
       --line: #e2e8f0;
@@ -122,7 +122,7 @@
       pointer-events: none;
       overflow: hidden;
     }
-    
+
     .hero-bg::before {
       content: "";
       position: absolute;
@@ -409,6 +409,12 @@
       line-height: 1.75;
     }
 
+    .faq-a a {
+      color: var(--brand);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
     .cta-box {
       margin-top: 40px;
       padding: 34px;
@@ -503,11 +509,7 @@
         <a href="#why">Why TakeMine</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="btn btn-primary" href="https://tally.so/r/q4OkD7" target="_blank">
-  Join waitlist
-</a>
-  Join waitlist
-</a>
+      <a class="btn btn-primary" href="https://tally.so/r/q4OkD7" target="_blank">Join waitlist</a>
     </div>
   </header>
 
@@ -531,13 +533,9 @@
           </p>
 
           <div class="actions">
-  <a class="btn btn-primary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank">
-    I want to rent
-  </a>
-  <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=list" target="_blank">
-    List an item
-  </a>
-</div>
+            <a class="btn btn-primary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank">I want to rent</a>
+            <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=list" target="_blank">List an item</a>
+          </div>
 
           <div class="meta-tags">
             <span class="tag">Berlin first</span>
@@ -640,7 +638,10 @@
           </div>
           <div class="faq-item">
             <div class="faq-q">How do I contact you?</div>
-            <div class="faq-a">Reach us directly at info@takemine.de.</div>
+            <div class="faq-a">
+              Reach us directly at
+              <a href="mailto:info@takemine.de?subject=Hello%20TakeMine">info@takemine.de</a>.
+            </div>
           </div>
         </div>
 
@@ -651,7 +652,7 @@
               Join early and help shape the first version of the product.
             </div>
           </div>
-          <a class="btn btn-primary" href="mailto:info@takemine.de?subject=I%20want%20early%20access%20to%20TakeMine">Get early access</a>
+          <a class="btn btn-primary" href="https://tally.so/r/q4OkD7" target="_blank">Get early access</a>
         </div>
       </div>
     </section>
@@ -667,77 +668,5 @@
       </div>
     </div>
   </footer>
-
-  <div id="modal" style="
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.5);
-    z-index:999;
-    align-items:center;
-    justify-content:center;
-  ">
-    <div style="
-      background:white;
-      padding:30px;
-      border-radius:20px;
-      max-width:400px;
-      width:90%;
-      box-shadow:0 20px 50px rgba(0,0,0,0.2);
-    ">
-
-      <h2 style="margin-top:0;">Join TakeMine 🚀</h2>
-      <p style="color:#64748b;">Get early access before launch</p>
-
-      <input id="emailInput"
-        placeholder="Enter your email"
-        style="
-          width:100%;
-          padding:14px;
-          margin-top:10px;
-          border:1px solid #e2e8f0;
-          border-radius:12px;
-          font-size:16px;
-        "
-      />
-
-      <button onclick="submitEmail()"
-        style="
-          margin-top:15px;
-          width:100%;
-          padding:14px;
-          background:#f97316;
-          color:white;
-          border:none;
-          border-radius:12px;
-          font-weight:bold;
-          font-size:16px;
-          cursor:pointer;
-        ">
-        Join waitlist
-      </button>
-
-    </div>
-  </div>
-
-  <script>
-    function openModal() {
-      document.getElementById("modal").style.display = "flex";
-    }
-
-    function submitEmail() {
-      const email = document.getElementById("emailInput").value;
-
-      if (!email) {
-        alert("Please enter your email");
-        return;
-      }
-
-      alert("You're on the waitlist 🚀");
-
-      document.getElementById("modal").style.display = "none";
-    }
-  </script>
-
 </body>
 </html>
