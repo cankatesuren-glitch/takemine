@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DSLR Camera | Take Mine</title>
+  <meta name="description" content="Preview the DSLR Camera rental detail page on Take Mine." />
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    .detail-page {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      padding: 44px 0 84px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .back-link:hover {
+      color: var(--brand);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .detail-media {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .detail-media img {
+      width: 100%;
+      height: 460px;
+      display: block;
+      object-fit: contain;
+      background: linear-gradient(135deg, #eef2f7 0%, #f8fafc 100%);
+      border-radius: 18px;
+    }
+
+    .detail-panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .detail-category {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .detail-title {
+      margin: 10px 0 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .detail-rating {
+      margin-top: 12px;
+      font-size: 15px;
+      color: #f59e0b;
+      font-weight: 800;
+    }
+
+    .detail-price {
+      margin-top: 18px;
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--brand);
+      letter-spacing: -0.03em;
+    }
+
+    .detail-price span {
+      font-size: 16px;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .detail-copy {
+      margin-top: 18px;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 16px;
+    }
+
+    .detail-owner {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .owner-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .detail-actions {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .detail-box {
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      background: #fcfdff;
+    }
+
+    .detail-box-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .detail-box-text {
+      margin-top: 8px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .detail-lower {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .info-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .info-card h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .info-card p,
+    .info-card li {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .info-card ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
+    }
+
+    .sticky-note {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: white;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .sticky-note strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .sticky-note span {
+      display: block;
+      margin-top: 8px;
+      color: #dbeafe;
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .pricing-box {
+      margin-top: 24px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px;
+      background: #ffffff;
+    }
+
+    .pricing-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .pricing-options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .pricing-option {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .pricing-option:hover {
+      border-color: var(--brand);
+      box-shadow: var(--shadow);
+    }
+
+    .pricing-option input {
+      display: none;
+    }
+
+    .pricing-option.active {
+      border-color: var(--brand);
+      background: #f8fbff;
+      box-shadow: var(--shadow);
+    }
+
+    .pricing-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pricing-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .pricing-note {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .pricing-value {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--brand);
+      white-space: nowrap;
+    }
+
+    .offer-box {
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fcfdff;
+      display: none;
+    }
+
+    .offer-box.active {
+      display: block;
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .offer-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .offer-field select,
+    .offer-field input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: 14px;
+      background: white;
+    }
+
+    .offer-submit {
+      margin-top: 14px;
+    }
+
+    .selected-plan {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    @media (max-width: 980px) {
+      .detail-grid,
+      .detail-lower {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-media img {
+        height: 360px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .detail-media {
+        padding: 14px;
+      }
+
+      .detail-media img {
+        height: 280px;
+      }
+
+      .detail-actions .btn {
+        width: 100%;
+      }
+
+      .offer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="./index.html" class="logo">TakeMine</a>
+
+      <nav class="nav">
+        <a href="./index.html#how">How it works</a>
+        <a href="./index.html#categories">Categories</a>
+        <a href="./index.html#why">Why TakeMine</a>
+        <a href="./index.html#faq">FAQ</a>
+      </nav>
+
+      <a class="btn btn-primary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
+        Join waitlist
+      </a>
+    </div>
+  </header>
+
+  <main class="detail-page">
+    <div class="container">
+      <a href="./rent.html" class="back-link">← Back to rentals</a>
+
+      <section class="detail-grid">
+        <div>
+          <div class="detail-media">
+            <img src="./camera.png" alt="DSLR Camera" />
+          </div>
+
+          <div class="sticky-note">
+            <strong>Why people rent this</strong>
+            <span>
+              Perfect for trips, events, content creation, and one-time shoots without buying
+              expensive camera equipment you may only use occasionally.
+            </span>
+          </div>
+        </div>
+
+        <div class="detail-panel">
+          <div class="detail-category">Electronics</div>
+          <h1 class="detail-title">DSLR Camera</h1>
+
+          <div class="detail-rating">★★★★★ 5.0 (18 reviews)</div>
+
+          <div class="detail-price">
+            €18 <span>/ day</span>
+          </div>
+
+          <p class="detail-copy">
+            A versatile DSLR camera ideal for photography, events, travel, and content creation.
+            Sharp image quality, easy handling, and available for local pickup in Berlin.
+          </p>
+
+          <div class="detail-owner">
+            <span class="owner-chip">Leon M.</span>
+            <span class="owner-chip">3 km away</span>
+            <span class="owner-chip">Berlin Kreuzberg</span>
+            <span class="owner-chip">Available this weekend</span>
+          </div>
+
+          <div class="pricing-box">
+            <div class="pricing-title">Choose your rental plan</div>
+
+            <div class="pricing-options">
+              <label class="pricing-option active">
+                <input type="radio" name="pricing" value="Daily - €18" checked />
+                <div class="pricing-left">
+                  <span class="pricing-name">Daily</span>
+                  <span class="pricing-note">Great for short shoots and events</span>
+                </div>
+                <div class="pricing-value">€18</div>
+              </label>
+
+              <label class="pricing-option">
+                <input type="radio" name="pricing" value="Weekly - €45" />
+                <div class="pricing-left">
+                  <span class="pricing-name">Weekly</span>
+                  <span class="pricing-note">Best for travel and longer projects</span>
+                </div>
+                <div class="pricing-value">€45</div>
+              </label>
+
+              <label class="pricing-option">
+                <input type="radio" name="pricing" value="Monthly - €90" />
+                <div class="pricing-left">
+                  <span class="pricing-name">Monthly</span>
+                  <span class="pricing-note">Flexible for extended use</span>
+                </div>
+                <div class="pricing-value">€90</div>
+              </label>
+
+              <label class="pricing-option" id="offerOption">
+                <input type="radio" name="pricing" value="Offer" />
+                <div class="pricing-left">
+                  <span class="pricing-name">Make an offer</span>
+                  <span class="pricing-note">Suggest your own price</span>
+                </div>
+                <div class="pricing-value">Custom</div>
+              </label>
+            </div>
+
+            <div class="offer-box" id="offerBox">
+              <div class="offer-field">
+                <label for="offerPeriod">Offer type</label>
+                <select id="offerPeriod">
+                  <option value="Daily">Daily</option>
+                  <option value="Weekly">Weekly</option>
+                  <option value="Monthly">Monthly</option>
+                </select>
+              </div>
+
+              <div class="offer-grid">
+                <div class="offer-field">
+                  <label for="offerPrice">Your price (€)</label>
+                  <input id="offerPrice" type="number" min="1" placeholder="Enter your offer" />
+                </div>
+
+                <div class="offer-field">
+                  <label for="offerNote">Optional note</label>
+                  <input id="offerNote" type="text" placeholder="e.g. Need it for a weekend trip" />
+                </div>
+              </div>
+
+              <div class="offer-submit">
+                <button class="btn btn-secondary" type="button" onclick="submitOffer()">Send offer</button>
+              </div>
+            </div>
+
+            <div class="selected-plan" id="selectedPlanText">Selected plan: Daily - €18</div>
+          </div>
+
+          <div class="detail-actions">
+            <a class="btn btn-primary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
+              Rent this item
+            </a>
+            <a class="btn btn-secondary" href="mailto:info@takemine.de?subject=Question%20about%20the%20DSLR%20Camera">
+              Ask a question
+            </a>
+          </div>
+
+          <div class="detail-box">
+            <div class="detail-box-title">Included</div>
+            <div class="detail-box-text">
+              DSLR camera body, zoom lens, battery, charger, and carrying strap.
+            </div>
+          </div>
+
+          <div class="detail-box">
+            <div class="detail-box-title">Best for</div>
+            <div class="detail-box-text">
+              Travel photography, event shoots, portraits, beginner content creation, and weekend projects.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="detail-lower">
+        <div class="info-card">
+          <h3>What renters say</h3>
+          <p>
+            This camera is highly rated because it is easy to handle and delivers solid image quality
+            for both beginners and casual creators.
+          </p>
+          <ul>
+            <li>“Perfect for my weekend trip.”</li>
+            <li>“Super easy pickup and great photo quality.”</li>
+            <li>“Much better than buying one just for one event.”</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h3>Rental notes</h3>
+          <p>
+            This is a demo product page preview for TakeMine. In the full product experience,
+            users would see pickup times, availability, owner profile details, and secure booking steps.
+          </p>
+          <ul>
+            <li>Pickup by arrangement</li>
+            <li>Local renting in Berlin</li>
+            <li>Preview only — not a live booking flow yet</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 TakeMine</div>
+      <div class="footer-links">
+        <a href="./index.html">Home</a>
+        <a href="./rent.html">Rentals</a>
+        <a href="mailto:info@takemine.de">info@takemine.de</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+  <script>
+    const pricingOptions = document.querySelectorAll('.pricing-option');
+    const pricingInputs = document.querySelectorAll('input[name="pricing"]');
+    const offerBox = document.getElementById('offerBox');
+    const selectedPlanText = document.getElementById('selectedPlanText');
+
+    pricingInputs.forEach((input) => {
+      input.addEventListener('change', () => {
+        pricingOptions.forEach((option) => option.classList.remove('active'));
+        input.closest('.pricing-option').classList.add('active');
+
+        if (input.value === 'Offer') {
+          offerBox.classList.add('active');
+          selectedPlanText.textContent = 'Selected plan: Make an offer';
+        } else {
+          offerBox.classList.remove('active');
+          selectedPlanText.textContent = `Selected plan: ${input.value}`;
+        }
+      });
+    });
+
+    function submitOffer() {
+      const period = document.getElementById('offerPeriod').value;
+      const price = document.getElementById('offerPrice').value;
+      const note = document.getElementById('offerNote').value;
+
+      if (!price) {
+        alert('Please enter your offer price.');
+        return;
+      }
+
+      alert(`Offer sent: ${period} - €${price}${note ? ' | Note: ' + note : ''}`);
+    }
+  </script>
+</body>
+</html>
