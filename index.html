@@ -5,511 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TakeMine</title>
   <meta name="description" content="Don't buy, Take Mine. Rent everyday items from people nearby." />
-  <style>
-    :root {
-      --brand: #1e3a8a;
-      --accent: #f97316;
-      --bg: #ffffff;
-      --soft: #f8fafc;
-      --headline-light: #94a3b8;
-      --text: #0f172a;
-      --muted: #64748b;
-      --line: #e2e8f0;
-      --shadow: 0 12px 32px rgba(15, 23, 42, 0.10);
-      --shadow-strong: 0 20px 48px rgba(15, 23, 42, 0.16);
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1140px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255,255,255,0.90);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 18px 0;
-    }
-
-    .logo {
-      font-size: 30px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      color: var(--brand);
-    }
-
-    .nav {
-      display: flex;
-      gap: 28px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .nav a:hover {
-      color: var(--brand);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 22px;
-      border-radius: 999px;
-      font-weight: 800;
-      transition: 0.25s ease;
-      border: 1px solid transparent;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-      box-shadow: var(--shadow);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      filter: brightness(0.97);
-    }
-
-    .btn-secondary {
-      background: white;
-      border-color: var(--line);
-      color: var(--text);
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 100px 0 90px;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .hero-bg::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url("hero.png") center center / cover no-repeat;
-      opacity: 0.32;
-      filter: blur(2px);
-      transform: scale(1.01);
-    }
-
-    .hero-bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(rgba(255,255,255,0.35), rgba(255,255,255,0.35)),
-        radial-gradient(circle at top left, rgba(30,58,138,0.08), transparent 24%),
-        radial-gradient(circle at bottom right, rgba(249,115,22,0.08), transparent 28%);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 760px;
-      animation: fadeUp 0.8s ease both;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 14px;
-      box-shadow: var(--shadow);
-      animation: fadeUp 0.7s ease both;
-    }
-
-    h1 {
-      margin: 20px 0 0;
-      font-size: clamp(48px, 8vw, 96px);
-      line-height: 0.95;
-      letter-spacing: -0.05em;
-      font-weight: 900;
-    }
-
-    .headline-light {
-      color: var(--headline-light);
-      display: inline-block;
-    }
-
-    .headline-brand {
-      color: var(--brand);
-      display: inline-block;
-      transition: 0.3s ease;
-    }
-
-    .headline-brand:hover {
-      transform: translateY(-3px);
-      color: #16306f;
-    }
-
-    .subtext {
-      margin-top: 24px;
-      font-size: 20px;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 720px;
-      animation: fadeUp 1s ease both;
-    }
-
-    .actions {
-      margin-top: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      animation: fadeUp 1.15s ease both;
-    }
-
-    .meta-tags {
-      margin-top: 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      animation: fadeUp 1.25s ease both;
-    }
-
-    .tag {
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.92);
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .floating-card {
-      margin-top: 24px;
-      display: inline-block;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-      padding: 16px;
-      max-width: 280px;
-      animation: floaty 4s ease-in-out infinite;
-    }
-
-    .floating-card strong {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-
-    .floating-card span {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .section {
-      padding: 84px 0;
-    }
-
-    .section-soft {
-      background: var(--soft);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .section-label {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--muted);
-      font-weight: 800;
-    }
-
-    .section-title {
-      margin: 12px 0 0;
-      font-size: clamp(30px, 4vw, 48px);
-      letter-spacing: -0.04em;
-      font-weight: 900;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 34px;
-    }
-
-    .step {
-      background: white;
-      border-radius: 28px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-      transition: 0.28s ease;
-    }
-
-    .step:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-strong);
-    }
-
-    .step-number {
-      width: 42px;
-      height: 42px;
-      border-radius: 999px;
-      background: var(--brand);
-      color: white;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      margin-bottom: 18px;
-    }
-
-    .step-title {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .step-text {
-      margin-top: 10px;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 28px;
-      align-items: start;
-    }
-
-    .pill-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .pill {
-      border: 1px solid var(--line);
-      background: white;
-      border-radius: 18px;
-      padding: 18px 16px;
-      font-weight: 700;
-      box-shadow: var(--shadow);
-      transition: 0.25s ease;
-    }
-
-    .pill:hover {
-      transform: translateY(-4px);
-      border-color: var(--brand);
-    }
-
-    .ai-box {
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-      color: white;
-      border-radius: 32px;
-      padding: 34px;
-      box-shadow: var(--shadow-strong);
-    }
-
-    .ai-box p,
-    .ai-box li {
-      color: #dbeafe;
-      line-height: 1.8;
-    }
-
-    .ai-box ul {
-      margin: 18px 0 0;
-      padding-left: 18px;
-    }
-
-    .why {
-      background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
-      color: white;
-    }
-
-    .why p {
-      color: #d1d5db;
-      max-width: 760px;
-      font-size: 18px;
-      line-height: 1.9;
-      margin-top: 18px;
-    }
-
-    .faq-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-      margin-top: 34px;
-    }
-
-    .faq-item {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-      transition: 0.25s ease;
-    }
-
-    .faq-item:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-strong);
-    }
-
-    .faq-q {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .faq-a {
-      margin-top: 10px;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .faq-a a {
-      color: var(--brand);
-      font-weight: 700;
-      text-decoration: underline;
-    }
-
-    .cta-box {
-      margin-top: 40px;
-      padding: 34px;
-      background: var(--soft);
-      border: 1px solid var(--line);
-      border-radius: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .footer {
-      border-top: 1px solid var(--line);
-      padding: 28px 0 44px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes floaty {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    @media (max-width: 980px) {
-      .steps, .split, .faq-grid { grid-template-columns: 1fr; }
-      .pill-grid { grid-template-columns: 1fr; }
-      .nav { display: none; }
-
-      .hero-bg::before {
-        opacity: 0.45;
-        filter: blur(1px);
-      }
-
-      .hero-bg::after {
-        background:
-          linear-gradient(rgba(255,255,255,0.80), rgba(255,255,255,0.80)),
-          radial-gradient(circle at top left, rgba(30,58,138,0.08), transparent 24%),
-          radial-gradient(circle at bottom right, rgba(249,115,22,0.08), transparent 28%);
-      }
-    }
-
-    @media (max-width: 560px) {
-      .topbar-inner { padding: 14px 0; }
-      .logo { font-size: 26px; }
-      .actions { flex-direction: column; }
-      .btn { width: 100%; }
-      .hero { padding-top: 48px; }
-      h1 { font-size: clamp(42px, 14vw, 64px); }
-      .subtext { font-size: 18px; }
-
-      .hero-bg::before {
-        opacity: 0.12;
-        filter: blur(4px);
-      }
-
-      .hero-bg::after {
-        background:
-          linear-gradient(rgba(255,255,255,0.84), rgba(255,255,255,0.84)),
-          radial-gradient(circle at top left, rgba(30,58,138,0.08), transparent 24%),
-          radial-gradient(circle at bottom right, rgba(249,115,22,0.08), transparent 28%);
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
     <div class="container topbar-inner">
       <a href="#top" class="logo">TakeMine</a>
+
       <nav class="nav">
         <a href="#how">How it works</a>
         <a href="#categories">Categories</a>
         <a href="#why">Why TakeMine</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="btn btn-primary" href="https://tally.so/r/q4OkD7" target="_blank">Join waitlist</a>
+
+      <a class="btn btn-primary" href="https://tally.so/r/q4OkD7" target="_blank" rel="noopener noreferrer">
+        Join waitlist
+      </a>
     </div>
   </header>
 
@@ -528,13 +40,17 @@
           </h1>
 
           <p class="subtext">
-            Rent everyday items from people nearby — tools, garden products, clothing, electronics, and more.
-            Save money when you rent, earn money when you lend.
+            Rent everyday items from people nearby — tools, garden products, clothing,
+            electronics, and more. Save money when you rent, earn money when you lend.
           </p>
 
           <div class="actions">
-            <a class="btn btn-primary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank">I want to rent</a>
-            <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=list" target="_blank">List an item</a>
+            <a class="btn btn-primary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
+              I want to rent
+            </a>
+            <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=list" target="_blank" rel="noopener noreferrer">
+              List an item
+            </a>
           </div>
 
           <div class="meta-tags">
@@ -555,21 +71,30 @@
       <div class="container">
         <div class="section-label">How it works</div>
         <h2 class="section-title">A simpler way to access what you need</h2>
+
         <div class="steps">
           <div class="step">
             <div class="step-number">1</div>
             <div class="step-title">Find or list</div>
-            <div class="step-text">Search for what you need nearby, or upload an item you want to rent out.</div>
+            <div class="step-text">
+              Search for what you need nearby, or upload an item you want to rent out.
+            </div>
           </div>
+
           <div class="step">
             <div class="step-number">2</div>
             <div class="step-title">Match faster with AI</div>
-            <div class="step-text">Get smarter suggestions for category, pricing and demand instead of guessing.</div>
+            <div class="step-text">
+              Get smarter suggestions for category, pricing and demand instead of guessing.
+            </div>
           </div>
+
           <div class="step">
             <div class="step-number">3</div>
             <div class="step-title">Rent with confidence</div>
-            <div class="step-text">Pick up locally, use what you need, and return it without buying or storing it forever.</div>
+            <div class="step-text">
+              Pick up locally, use what you need, and return it without buying or storing it forever.
+            </div>
           </div>
         </div>
       </div>
@@ -580,9 +105,12 @@
         <div>
           <div class="section-label">Categories</div>
           <h2 class="section-title">Built for real, everyday renting</h2>
-          <p class="subtext" style="margin-top:18px; max-width:700px;">
-            TakeMine is designed for things people use sometimes, but not often enough to buy, store, or own forever.
+
+          <p class="subtext subtext-small">
+            TakeMine is designed for things people use sometimes, but not often enough to buy,
+            store, or own forever.
           </p>
+
           <div class="pill-grid">
             <div class="pill">Power tools</div>
             <div class="pill">Garden equipment</div>
@@ -594,10 +122,11 @@
         </div>
 
         <div class="ai-box">
-          <div class="section-label" style="color:#c7d2fe;">AI layer</div>
-          <h2 class="section-title" style="color:white; margin-top:10px;">More than a listing site</h2>
+          <div class="section-label section-label-light">AI layer</div>
+          <h2 class="section-title section-title-light">More than a listing site</h2>
           <p>
-            TakeMine is built to become the intelligence layer for local renting — helping people decide what to rent, when to list, and how to price.
+            TakeMine is built to become the intelligence layer for local renting — helping people
+            decide what to rent, when to list, and how to price.
           </p>
           <ul>
             <li>AI-generated listing suggestions</li>
@@ -611,10 +140,12 @@
 
     <section id="why" class="section why">
       <div class="container">
-        <div class="section-label" style="color:#cbd5e1;">Why TakeMine</div>
-        <h2 class="section-title" style="color:white;">Not just another listing site</h2>
+        <div class="section-label section-label-light-muted">Why TakeMine</div>
+        <h2 class="section-title section-title-light">Not just another listing site</h2>
         <p>
-          Buying everything is expensive, wasteful and often unnecessary. TakeMine helps people access what they need, when they need it, while turning unused items into income for someone nearby.
+          Buying everything is expensive, wasteful and often unnecessary. TakeMine helps people
+          access what they need, when they need it, while turning unused items into income for
+          someone nearby.
         </p>
       </div>
     </section>
@@ -623,36 +154,45 @@
       <div class="container">
         <div class="section-label">FAQ</div>
         <h2 class="section-title">Questions people will ask</h2>
+
         <div class="faq-grid">
           <div class="faq-item">
             <div class="faq-q">Where is TakeMine launching first?</div>
             <div class="faq-a">Germany first, with an initial focus on Berlin.</div>
           </div>
+
           <div class="faq-item">
             <div class="faq-q">What can be rented?</div>
-            <div class="faq-a">Everyday items except housing — including tools, garden products, clothing, and electronics.</div>
+            <div class="faq-a">
+              Everyday items except housing — including tools, garden products, clothing, and electronics.
+            </div>
           </div>
+
           <div class="faq-item">
             <div class="faq-q">How do I join early?</div>
             <div class="faq-a">Use one of the buttons above and we’ll add you to the early access list.</div>
           </div>
+
           <div class="faq-item">
             <div class="faq-q">How do I contact you?</div>
             <div class="faq-a">
               Reach us directly at
-              <a href="mailto:info@takemine.de?subject=Hello%20TakeMine">info@takemine.de</a>.
+              <a class="mail-link" href="mailto:info@takemine.de?subject=Hello%20TakeMine">info@takemine.de</a>.
             </div>
           </div>
         </div>
 
         <div class="cta-box">
           <div>
-            <div style="font-size:28px; font-weight:900; letter-spacing:-0.04em;">Ready to try TakeMine?</div>
-            <div style="margin-top:10px; color:var(--muted); line-height:1.8;">
+            <div class="cta-title">Ready to try TakeMine?</div>
+            <div class="cta-text">
               Join early and help shape the first version of the product.
             </div>
           </div>
-          <a class="btn btn-primary" href="https://tally.so/r/q4OkD7" target="_blank">Get early access</a>
+
+          <a class="btn btn-primary" href="https://tally.so/r/q4OkD7" target="_blank" rel="noopener noreferrer">
+            Get early access
+          </a>
         </div>
       </div>
     </section>
@@ -663,10 +203,12 @@
       <div>© 2026 TakeMine</div>
       <div class="footer-links">
         <a href="mailto:info@takemine.de">info@takemine.de</a>
-        <a href="#">Impressum</a>
-        <a href="#">Privacy</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="privacy.html">Privacy</a>
       </div>
     </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
