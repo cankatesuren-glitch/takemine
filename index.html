@@ -4,43 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TakeMine</title>
-  <meta name="description" content="Don't buy it. Take Mine. Rent everyday items from people nearby." />
+  <meta name="description" content="Don't buy, Take Mine. Rent everyday items from people nearby." />
   <style>
     :root {
+      --brand: #1e3a8a;
+      --accent: #f97316;
       --bg: #ffffff;
+      --soft: #f8fafc;
+      --headline-light: #f3f4f6;
       --text: #0f172a;
       --muted: #64748b;
       --line: #e2e8f0;
-      --soft: #f8fafc;
-      --dark: #111827;
-      --dark-2: #1f2937;
-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-      --shadow-strong: 0 16px 40px rgba(15, 23, 42, 0.12);
-      --radius: 24px;
+      --shadow: 0 12px 32px rgba(15, 23, 42, 0.10);
+      --shadow-strong: 0 20px 48px rgba(15, 23, 42, 0.16);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
     }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
     .container {
-      width: min(1120px, calc(100% - 32px));
+      width: min(1140px, calc(100% - 32px));
       margin: 0 auto;
     }
 
@@ -48,9 +39,9 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(14px);
-      background: rgba(255, 255, 255, 0.86);
-      border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
     }
 
     .topbar-inner {
@@ -58,84 +49,81 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 16px 0;
+      padding: 18px 0;
     }
 
-    .brand {
-      font-size: 28px;
+    .logo {
+      font-size: 30px;
       font-weight: 900;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.04em;
+      color: var(--brand);
     }
 
     .nav {
       display: flex;
       gap: 28px;
-      font-size: 14px;
       color: var(--muted);
+      font-size: 14px;
     }
 
-    .nav a:hover {
-      color: var(--text);
-    }
+    .nav a:hover { color: var(--brand); }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
       padding: 14px 22px;
       border-radius: 999px;
-      font-weight: 600;
+      font-weight: 800;
       transition: 0.25s ease;
       border: 1px solid transparent;
       cursor: pointer;
     }
 
-    .btn-dark {
-      background: var(--dark);
+    .btn-primary {
+      background: var(--accent);
       color: white;
       box-shadow: var(--shadow);
     }
 
-    .btn-dark:hover {
+    .btn-primary:hover {
       transform: translateY(-2px);
-      background: var(--dark-2);
+      filter: brightness(0.97);
     }
 
-    .btn-light {
+    .btn-secondary {
       background: white;
       border-color: var(--line);
       color: var(--text);
     }
 
-    .btn-light:hover {
+    .btn-secondary:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow);
-      background: #fcfcfd;
     }
 
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 72px 0 56px;
+      padding: 70px 0 40px;
       background:
-        radial-gradient(circle at top left, rgba(15, 23, 42, 0.08), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.06), transparent 32%);
+        radial-gradient(circle at top left, rgba(30,58,138,0.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(249,115,22,0.10), transparent 30%);
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 42px;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
       align-items: center;
     }
 
     .eyebrow {
       display: inline-flex;
       padding: 8px 14px;
-      border: 1px solid var(--line);
-      background: white;
       border-radius: 999px;
+      background: white;
+      border: 1px solid var(--line);
       color: var(--muted);
       font-size: 14px;
       box-shadow: var(--shadow);
@@ -144,95 +132,96 @@
 
     h1 {
       margin: 18px 0 0;
-      font-size: clamp(44px, 7vw, 78px);
+      font-size: clamp(42px, 7vw, 82px);
       line-height: 0.98;
       letter-spacing: -0.05em;
       font-weight: 900;
-      animation: fadeUp 0.8s ease both;
+      animation: fadeUp 0.85s ease both;
     }
 
-    .headline-accent {
-      color: #94a3b8;
+    .headline-light { color: var(--headline-light); }
+    .headline-brand {
+      color: var(--brand);
       display: inline-block;
-      transition: 0.35s ease;
+      transition: 0.3s ease;
     }
 
-    .headline-accent:hover {
+    .headline-brand:hover {
       transform: translateY(-3px);
-      color: #475569;
+      color: #16306f;
     }
 
     .subtext {
-      margin-top: 22px;
-      max-width: 680px;
-      font-size: 19px;
+      margin-top: 24px;
+      font-size: 20px;
       line-height: 1.8;
       color: var(--muted);
-      animation: fadeUp 0.9s ease both;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 28px;
+      max-width: 640px;
       animation: fadeUp 1s ease both;
     }
 
-    .hero-tags {
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      animation: fadeUp 1.15s ease both;
+    }
+
+    .meta-tags {
+      margin-top: 24px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 24px;
-      animation: fadeUp 1.1s ease both;
+      animation: fadeUp 1.25s ease both;
     }
 
     .tag {
       padding: 10px 14px;
       border-radius: 999px;
       border: 1px solid var(--line);
+      background: rgba(255,255,255,0.92);
       color: var(--muted);
       font-size: 14px;
-      background: rgba(255, 255, 255, 0.85);
     }
 
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+    .hero-visual {
+      position: relative;
+      animation: fadeUp 1s ease both;
     }
 
-    .card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      animation: fadeUp 0.8s ease both;
-    }
-
-    .card:hover {
-      transform: translateY(-6px) rotate(-0.3deg);
+    .hero-image {
+      border-radius: 32px;
+      overflow: hidden;
       box-shadow: var(--shadow-strong);
+      border: 1px solid var(--line);
+      background: white;
     }
 
-    .card:nth-child(1),
-    .card:nth-child(3) {
-      transform: translateY(22px);
+    .floating-card {
+      position: absolute;
+      left: -18px;
+      bottom: 18px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      width: 220px;
+      animation: floaty 4s ease-in-out infinite;
     }
 
-    .card-title {
-      font-size: 21px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+    .floating-card strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
     }
 
-    .card-text {
-      margin-top: 8px;
+    .floating-card span {
       color: var(--muted);
-      line-height: 1.7;
-      font-size: 15px;
+      font-size: 13px;
+      line-height: 1.6;
     }
 
     .section {
@@ -250,14 +239,14 @@
       text-transform: uppercase;
       letter-spacing: 0.18em;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .section-title {
       margin: 12px 0 0;
-      font-size: clamp(30px, 4vw, 46px);
-      font-weight: 800;
+      font-size: clamp(30px, 4vw, 48px);
       letter-spacing: -0.04em;
+      font-weight: 900;
     }
 
     .steps {
@@ -272,7 +261,7 @@
       border-radius: 28px;
       padding: 28px;
       box-shadow: var(--shadow);
-      transition: 0.3s ease;
+      transition: 0.28s ease;
     }
 
     .step:hover {
@@ -284,18 +273,18 @@
       width: 42px;
       height: 42px;
       border-radius: 999px;
+      background: var(--brand);
+      color: white;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: var(--dark);
-      color: white;
-      font-weight: 700;
+      font-weight: 900;
       margin-bottom: 18px;
     }
 
     .step-title {
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: -0.02em;
     }
 
@@ -321,38 +310,29 @@
 
     .pill {
       border: 1px solid var(--line);
+      background: white;
       border-radius: 18px;
       padding: 18px 16px;
-      font-weight: 600;
-      background: white;
+      font-weight: 700;
       box-shadow: var(--shadow);
       transition: 0.25s ease;
     }
 
     .pill:hover {
       transform: translateY(-4px);
-      border-color: var(--dark);
-      background: #fcfcfd;
+      border-color: var(--brand);
     }
 
     .ai-box {
-      background: var(--dark);
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
       color: white;
       border-radius: 32px;
       padding: 34px;
       box-shadow: var(--shadow-strong);
     }
 
-    .ai-box p,
-    .ai-box li {
-      color: #cbd5e1;
-      line-height: 1.8;
-    }
-
-    .ai-box ul {
-      margin: 18px 0 0;
-      padding-left: 18px;
-    }
+    .ai-box p, .ai-box li { color: #dbeafe; line-height: 1.8; }
+    .ai-box ul { margin: 18px 0 0; padding-left: 18px; }
 
     .why {
       background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
@@ -360,10 +340,10 @@
     }
 
     .why p {
-      color: #cbd5e1;
+      color: #d1d5db;
       max-width: 760px;
-      line-height: 1.85;
       font-size: 18px;
+      line-height: 1.9;
       margin-top: 18px;
     }
 
@@ -375,12 +355,12 @@
     }
 
     .faq-item {
+      background: white;
       border: 1px solid var(--line);
       border-radius: 24px;
       padding: 24px;
       box-shadow: var(--shadow);
       transition: 0.25s ease;
-      background: white;
     }
 
     .faq-item:hover {
@@ -389,8 +369,8 @@
     }
 
     .faq-q {
-      font-weight: 700;
       font-size: 18px;
+      font-weight: 800;
       letter-spacing: -0.02em;
     }
 
@@ -401,11 +381,11 @@
     }
 
     .cta-box {
-      margin-top: 42px;
+      margin-top: 40px;
       padding: 34px;
-      border-radius: 30px;
       background: var(--soft);
       border: 1px solid var(--line);
+      border-radius: 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -434,79 +414,42 @@
     }
 
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 920px) {
-      .hero-grid,
-      .steps,
-      .split,
-      .faq-grid {
-        grid-template-columns: 1fr;
-      }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
 
-      .card-grid,
-      .pill-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .card:nth-child(1),
-      .card:nth-child(3) {
-        transform: none;
-      }
-
-      .nav {
-        display: none;
-      }
-
-      .hero {
-        padding-top: 52px;
-      }
+    @media (max-width: 980px) {
+      .hero-grid, .steps, .split, .faq-grid { grid-template-columns: 1fr; }
+      .pill-grid { grid-template-columns: 1fr; }
+      .nav { display: none; }
+      .floating-card { position: static; width: 100%; margin-top: 16px; }
     }
 
     @media (max-width: 560px) {
-      .topbar-inner {
-        padding: 14px 0;
-      }
-
-      .brand {
-        font-size: 24px;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .section,
-      .hero {
-        padding-left: 0;
-        padding-right: 0;
-      }
+      .topbar-inner { padding: 14px 0; }
+      .logo { font-size: 26px; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .hero { padding-top: 48px; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="container topbar-inner">
-      <a href="#top" class="brand">TakeMine</a>
+      <a href="#top" class="logo">TakeMine</a>
       <nav class="nav">
         <a href="#how">How it works</a>
         <a href="#categories">Categories</a>
         <a href="#why">Why TakeMine</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="btn btn-dark" href="mailto:info@takemine.de?subject=Join%20TakeMine">Join waitlist</a>
+      <a class="btn btn-primary" href="mailto:info@takemine.de?subject=Join%20TakeMine">Join waitlist</a>
     </div>
   </header>
 
@@ -516,43 +459,34 @@
         <div>
           <div class="eyebrow">AI-powered rental marketplace in Germany</div>
           <h1>
-            Don't buy it.
+            <span class="headline-light">Don't buy,</span>
             <br />
-            <span class="headline-accent">Take Mine.</span>
+            <span class="headline-brand">Take Mine.</span>
           </h1>
           <p class="subtext">
             Rent everyday items from people nearby — tools, garden products, clothing, electronics, and more.
             Save money when you rent, earn money when you lend.
           </p>
 
-          <div class="hero-actions">
-            <a class="btn btn-dark" href="mailto:info@takemine.de?subject=I%20want%20to%20rent%20with%20TakeMine">I want to rent</a>
-            <a class="btn btn-light" href="mailto:info@takemine.de?subject=I%20want%20to%20list%20an%20item%20on%20TakeMine">List an item</a>
+          <div class="actions">
+            <a class="btn btn-primary" href="mailto:info@takemine.de?subject=I%20want%20to%20rent%20with%20TakeMine">I want to rent</a>
+            <a class="btn btn-secondary" href="mailto:info@takemine.de?subject=I%20want%20to%20list%20an%20item%20on%20TakeMine">List an item</a>
           </div>
 
-          <div class="hero-tags">
+          <div class="meta-tags">
             <span class="tag">Berlin first</span>
             <span class="tag">AI suggestions</span>
             <span class="tag">Local renting</span>
           </div>
         </div>
 
-        <div class="card-grid">
-          <div class="card">
-            <div class="card-title">Tools</div>
-            <div class="card-text">Drills, ladders, pressure washers and other useful items for short-term use.</div>
+        <div class="hero-visual">
+          <div class="hero-image">
+            <img src="images/hero.png" alt="TakeMine marketplace preview" />
           </div>
-          <div class="card">
-            <div class="card-title">Garden</div>
-            <div class="card-text">Lawn mowers, trimmers, leaf blowers and more for seasonal or occasional work.</div>
-          </div>
-          <div class="card">
-            <div class="card-title">Clothing</div>
-            <div class="card-text">Event outfits, occasion wear and pieces you need for a moment, not forever.</div>
-          </div>
-          <div class="card">
-            <div class="card-title">Electronics</div>
-            <div class="card-text">Cameras, speakers, projectors and devices that are expensive to buy for one use.</div>
+          <div class="floating-card">
+            <strong>Launch focus</strong>
+            <span>Start with Berlin, validate demand, then expand across Germany with smarter AI-assisted renting.</span>
           </div>
         </div>
       </div>
@@ -562,7 +496,6 @@
       <div class="container">
         <div class="section-label">How it works</div>
         <h2 class="section-title">A simpler way to access what you need</h2>
-
         <div class="steps">
           <div class="step">
             <div class="step-number">1</div>
@@ -591,7 +524,6 @@
           <p class="subtext" style="margin-top:18px; max-width:700px;">
             TakeMine is designed for things people use sometimes, but not often enough to buy, store, or own forever.
           </p>
-
           <div class="pill-grid">
             <div class="pill">Power tools</div>
             <div class="pill">Garden equipment</div>
@@ -603,7 +535,7 @@
         </div>
 
         <div class="ai-box">
-          <div class="section-label" style="color:#94a3b8;">AI layer</div>
+          <div class="section-label" style="color:#c7d2fe;">AI layer</div>
           <h2 class="section-title" style="color:white; margin-top:10px;">More than a listing site</h2>
           <p>
             TakeMine is built to become the intelligence layer for local renting — helping people decide what to rent, when to list, and how to price.
@@ -620,7 +552,7 @@
 
     <section id="why" class="section why">
       <div class="container">
-        <div class="section-label" style="color:#94a3b8;">Why TakeMine</div>
+        <div class="section-label" style="color:#cbd5e1;">Why TakeMine</div>
         <h2 class="section-title" style="color:white;">Not just another listing site</h2>
         <p>
           Buying everything is expensive, wasteful and often unnecessary. TakeMine helps people access what they need, when they need it, while turning unused items into income for someone nearby.
@@ -632,7 +564,6 @@
       <div class="container">
         <div class="section-label">FAQ</div>
         <h2 class="section-title">Questions people will ask</h2>
-
         <div class="faq-grid">
           <div class="faq-item">
             <div class="faq-q">Where is TakeMine launching first?</div>
@@ -644,7 +575,7 @@
           </div>
           <div class="faq-item">
             <div class="faq-q">How do I join early?</div>
-            <div class="faq-a">Use one of the email buttons and we’ll add you to the early access list.</div>
+            <div class="faq-a">Use one of the buttons above and we’ll add you to the early access list.</div>
           </div>
           <div class="faq-item">
             <div class="faq-q">How do I contact you?</div>
@@ -654,12 +585,12 @@
 
         <div class="cta-box">
           <div>
-            <div style="font-size:28px; font-weight:800; letter-spacing:-0.04em;">Ready to try TakeMine?</div>
+            <div style="font-size:28px; font-weight:900; letter-spacing:-0.04em;">Ready to try TakeMine?</div>
             <div style="margin-top:10px; color:var(--muted); line-height:1.8;">
               Join early and help shape the first version of the product.
             </div>
           </div>
-          <a class="btn btn-dark" href="mailto:info@takemine.de?subject=I%20want%20early%20access%20to%20TakeMine">Get early access</a>
+          <a class="btn btn-primary" href="mailto:info@takemine.de?subject=I%20want%20early%20access%20to%20TakeMine">Get early access</a>
         </div>
       </div>
     </section>
