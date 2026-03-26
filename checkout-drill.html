@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout | Cordless Drill | TakeMine</title>
+  <meta name="description" content="Complete your Cordless Drill booking on TakeMine." />
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    .checkout-page {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      padding: 44px 0 84px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .back-link:hover {
+      color: var(--brand);
+    }
+
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .checkout-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .product-mini {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .product-mini img {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      display: block;
+      background: linear-gradient(135deg, #eef2f7 0%, #f8fafc 100%);
+      border-radius: 18px;
+      padding: 12px;
+    }
+
+    .mini-category {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .mini-title {
+      margin-top: 6px;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .mini-rating {
+      margin-top: 8px;
+      color: #f59e0b;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .section-head {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .summary-row strong {
+      color: var(--text);
+    }
+
+    .summary-total {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .summary-total .summary-row {
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .summary-note {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: white;
+    }
+
+    .summary-note strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .summary-note span {
+      display: block;
+      margin-top: 8px;
+      color: #dbeafe;
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      font-size: 14px;
+      background: white;
+    }
+
+    .double-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .checkout-actions {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tiny-note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .protection-box {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fcfdff;
+    }
+
+    .protection-box strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .protection-box ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .protection-box li {
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .checkout-grid,
+      .double-grid,
+      .product-mini {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="./index.html" class="logo">TakeMine</a>
+
+      <nav class="nav">
+        <a href="./rent.html">Rent</a>
+        <a href="./account.html">Account</a>
+        <a href="./messages.html">Messages</a>
+      </nav>
+
+      <a class="btn btn-primary" href="./account.html">My account</a>
+    </div>
+  </header>
+
+  <main class="checkout-page">
+    <div class="container">
+      <a href="./drill.html" class="back-link">← Back to item</a>
+
+      <section class="checkout-grid">
+        <div class="checkout-card">
+          <div class="section-head">Booking summary</div>
+
+          <div class="product-mini">
+            <img src="./drill.png" alt="Cordless Drill" />
+            <div>
+              <div class="mini-category">Tools</div>
+              <div class="mini-title">Cordless Drill</div>
+              <div class="mini-rating">★★★★★ 5.0 (25 reviews)</div>
+            </div>
+          </div>
+
+          <div class="summary-list">
+            <div class="summary-row">
+              <span>Selected plan</span>
+              <strong>Daily</strong>
+            </div>
+            <div class="summary-row">
+              <span>Rental fee</span>
+              <strong>€9</strong>
+            </div>
+            <div class="summary-row">
+              <span>Deposit</span>
+              <strong>€30</strong>
+            </div>
+            <div class="summary-row">
+              <span>Service fee</span>
+              <strong>€1</strong>
+            </div>
+          </div>
+
+          <div class="summary-total">
+            <div class="summary-row">
+              <span>Total charged now</span>
+              <strong>€40</strong>
+            </div>
+            <div class="summary-row" style="margin-top: 8px;">
+              <span>Refundable after return</span>
+              <strong>€30</strong>
+            </div>
+          </div>
+
+          <div class="summary-note">
+            <strong>Protected by TakeMine</strong>
+            <span>
+              This booking uses secure payment, a refundable deposit, and documented pickup/return
+              to support fair issue resolution.
+            </span>
+          </div>
+        </div>
+
+        <div class="checkout-card">
+          <div class="section-head">Complete your booking</div>
+
+          <div class="form-grid">
+            <div class="double-grid">
+              <div class="field">
+                <label for="fullName">Full name</label>
+                <input id="fullName" type="text" placeholder="Your full name" />
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="you@example.com" />
+              </div>
+            </div>
+
+            <div class="double-grid">
+              <div class="field">
+                <label for="pickupDate">Pickup date</label>
+                <input id="pickupDate" type="date" />
+              </div>
+
+              <div class="field">
+                <label for="returnDate">Return date</label>
+                <input id="returnDate" type="date" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="paymentMethod">Payment method</label>
+              <select id="paymentMethod">
+                <option>Visa ending in 4242</option>
+                <option>Mastercard ending in 4444</option>
+                <option>Add new card</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="pickupNote">Optional message to owner</label>
+              <input id="pickupNote" type="text" placeholder="e.g. I can pick it up after 11am" />
+            </div>
+
+            <div class="protection-box">
+              <strong>How protection works</strong>
+              <ul>
+                <li>Your payment method is stored securely for this booking.</li>
+                <li>A refundable deposit is returned after a successful return.</li>
+                <li>Pickup and return may require photo confirmation.</li>
+                <li>Damage issues are reviewed before any final charge decision.</li>
+              </ul>
+            </div>
+
+            <label class="checkbox-row">
+              <input type="checkbox" id="termsCheck" />
+              <span>
+                I agree to the rental terms, deposit rules, and TakeMine protection process for eligible cases.
+              </span>
+            </label>
+
+            <div class="checkout-actions">
+              <button class="btn btn-primary" type="button" onclick="confirmBooking()">Confirm booking</button>
+              <a class="btn btn-secondary" href="./drill.html">Cancel</a>
+            </div>
+
+            <div class="tiny-note">
+              Demo checkout only — this page previews how booking, deposit, and payment details could appear in the live product.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 TakeMine</div>
+      <div class="footer-links">
+        <a href="./index.html">Home</a>
+        <a href="./rent.html">Rentals</a>
+        <a href="./account.html">Account</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function confirmBooking() {
+      const fullName = document.getElementById("fullName").value;
+      const email = document.getElementById("email").value;
+      const termsChecked = document.getElementById("termsCheck").checked;
+
+      if (!fullName || !email) {
+        alert("Please complete your name and email.");
+        return;
+      }
+
+      if (!termsChecked) {
+        alert("Please accept the rental terms first.");
+        return;
+      }
+
+      alert("Booking submitted. In the live version, this would continue to payment confirmation.");
+    }
+  </script>
+</body>
+</html>
