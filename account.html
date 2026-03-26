@@ -3,46 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anna K. | Take Mine</title>
-  <meta name="description" content="Preview the owner profile page for Anna K. on Take Mine." />
+  <title>My Account | TakeMine</title>
+  <meta name="description" content="Preview the TakeMine user account dashboard." />
   <link rel="stylesheet" href="./styles.css" />
   <style>
-    .profile-page {
+    .account-page {
       min-height: 100vh;
       background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
       padding: 44px 0 84px;
     }
 
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      font-weight: 700;
-      margin-bottom: 24px;
-    }
-
-    .back-link:hover {
-      color: var(--brand);
-    }
-
-    .profile-hero {
+    .account-hero {
       display: grid;
       grid-template-columns: 0.95fr 1.05fr;
-      gap: 28px;
+      gap: 24px;
       align-items: start;
     }
 
-    .profile-card,
-    .profile-side,
-    .listing-card {
+    .account-card,
+    .dashboard-card,
+    .mini-card {
       background: white;
       border: 1px solid var(--line);
       border-radius: 28px;
       box-shadow: var(--shadow);
     }
 
-    .profile-card {
+    .account-card {
       padding: 28px;
     }
 
@@ -60,7 +47,7 @@
       letter-spacing: -0.03em;
     }
 
-    .profile-name {
+    .account-name {
       margin-top: 18px;
       font-size: 34px;
       font-weight: 900;
@@ -68,21 +55,20 @@
       color: var(--text);
     }
 
-    .profile-rating {
-      margin-top: 10px;
-      color: #f59e0b;
-      font-weight: 800;
-      font-size: 15px;
+    .account-email {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 16px;
     }
 
-    .profile-meta {
-      margin-top: 16px;
+    .account-chips {
+      margin-top: 18px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .meta-chip {
+    .chip {
       padding: 10px 14px;
       border-radius: 999px;
       border: 1px solid var(--line);
@@ -92,35 +78,35 @@
       font-weight: 700;
     }
 
-    .profile-bio {
+    .account-bio {
       margin-top: 18px;
       color: var(--muted);
       line-height: 1.85;
       font-size: 16px;
     }
 
-    .profile-actions {
+    .account-actions {
       margin-top: 22px;
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
     }
 
-    .profile-side {
+    .dashboard-card {
       padding: 28px;
     }
 
-    .side-title {
-      font-size: 18px;
+    .dashboard-title {
+      font-size: 20px;
       font-weight: 900;
       color: var(--text);
       letter-spacing: -0.02em;
     }
 
-    .stat-grid {
+    .stats-grid {
       margin-top: 18px;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 14px;
     }
 
@@ -145,7 +131,7 @@
       letter-spacing: -0.03em;
     }
 
-    .trust-box {
+    .welcome-box {
       margin-top: 20px;
       padding: 18px;
       border-radius: 20px;
@@ -154,13 +140,13 @@
       box-shadow: var(--shadow-strong);
     }
 
-    .trust-box strong {
+    .welcome-box strong {
       display: block;
       font-size: 16px;
       font-weight: 900;
     }
 
-    .trust-box span {
+    .welcome-box span {
       display: block;
       margin-top: 8px;
       color: #dbeafe;
@@ -169,11 +155,41 @@
     }
 
     .section-title-custom {
-      margin-top: 40px;
+      margin-top: 34px;
       font-size: 28px;
       font-weight: 900;
       letter-spacing: -0.03em;
       color: var(--text);
+    }
+
+    .dashboard-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .mini-card {
+      padding: 24px;
+    }
+
+    .mini-card h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .mini-card p,
+    .mini-card li {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .mini-card ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
     }
 
     .listing-grid {
@@ -184,6 +200,10 @@
     }
 
     .listing-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
       overflow: hidden;
       transition: 0.25s ease;
     }
@@ -240,46 +260,31 @@
       display: block;
     }
 
-    .review-grid {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
+    @media (max-width: 1080px) {
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
 
-    .review-card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .review-head {
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .review-stars {
-      margin-top: 8px;
-      color: #f59e0b;
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .review-text {
-      margin-top: 10px;
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 15px;
+      .listing-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     @media (max-width: 980px) {
-      .profile-hero,
-      .listing-grid,
-      .review-grid {
+      .account-hero,
+      .dashboard-grid {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .stats-grid,
+      .listing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .account-actions .btn {
+        width: 100%;
       }
     }
   </style>
@@ -296,82 +301,98 @@
         <a href="./index.html#faq">FAQ</a>
       </nav>
 
-      <a class="btn btn-primary" href="https://tally.so/r/q4OkD7" target="_blank" rel="noopener noreferrer">
-        Join waitlist
-      </a>
+      <a class="btn btn-primary" href="./account.html">My account</a>
     </div>
   </header>
 
-  <main class="profile-page">
+  <main class="account-page">
     <div class="container">
-      <a href="./drill.html" class="back-link">← Back to item</a>
+      <section class="account-hero">
+        <div class="account-card">
+          <div class="avatar">CK</div>
 
-      <section class="profile-hero">
-        <div class="profile-card">
-          <div class="avatar">AK</div>
+          <div class="account-name">Can K.</div>
+          <div class="account-email">can@example.com</div>
 
-          <div class="profile-name">Anna K.</div>
-          <div class="profile-rating">★★★★★ 5.0 (25 reviews)</div>
-
-          <div class="profile-meta">
-            <span class="meta-chip">Berlin Mitte</span>
-            <span class="meta-chip">Member since 2024</span>
-            <span class="meta-chip">Usually responds in 1 hour</span>
-            <span class="meta-chip">3 active listings</span>
+          <div class="account-chips">
+            <span class="chip">Berlin</span>
+            <span class="chip">Renter</span>
+            <span class="chip">Occasional lister</span>
+            <span class="chip">Member since 2026</span>
           </div>
 
-          <p class="profile-bio">
-            I like sharing practical items that people often need only once in a while.
-            Most of my listings are for home projects, small repairs, and everyday tasks.
-            I keep everything clean, ready for pickup, and easy to use.
+          <p class="account-bio">
+            I use TakeMine to rent practical items for short-term needs instead of buying them.
+            I also occasionally list things I do not use every day.
           </p>
 
-          <div class="profile-actions">
-            <a class="btn btn-primary" href="mailto:info@takemine.de?subject=Contact%20Anna%20K.">
-              Contact owner
-            </a>
-            <a class="btn btn-secondary" href="./drill.html">
-              View listed item
-            </a>
+          <div class="account-actions">
+            <a class="btn btn-primary" href="./rent.html">Browse rentals</a>
+            <a class="btn btn-secondary" href="mailto:info@takemine.de?subject=Account%20support">Account support</a>
           </div>
         </div>
 
-        <div class="profile-side">
-          <div class="side-title">Owner snapshot</div>
+        <div class="dashboard-card">
+          <div class="dashboard-title">Account overview</div>
 
-          <div class="stat-grid">
+          <div class="stats-grid">
             <div class="stat-box">
-              <div class="stat-label">Response rate</div>
-              <div class="stat-value">98%</div>
+              <div class="stat-label">Saved items</div>
+              <div class="stat-value">6</div>
             </div>
 
             <div class="stat-box">
-              <div class="stat-label">Repeat renters</div>
-              <div class="stat-value">11</div>
+              <div class="stat-label">Active rentals</div>
+              <div class="stat-value">1</div>
             </div>
 
             <div class="stat-box">
-              <div class="stat-label">Completed rentals</div>
-              <div class="stat-value">32</div>
+              <div class="stat-label">My listings</div>
+              <div class="stat-value">2</div>
             </div>
 
             <div class="stat-box">
-              <div class="stat-label">Avg. rating</div>
-              <div class="stat-value">5.0</div>
+              <div class="stat-label">Unread messages</div>
+              <div class="stat-value">3</div>
             </div>
           </div>
 
-          <div class="trust-box">
-            <strong>Why people trust Anna</strong>
+          <div class="welcome-box">
+            <strong>Welcome back</strong>
             <span>
-              Quick replies, well-maintained items, flexible pickup, and clear communication.
-              A reliable owner profile for practical local rentals.
+              You currently have one active rental and a few saved items waiting for you.
+              When the full product launches, this dashboard could show your live bookings,
+              pickup details, messages, and listing performance.
             </span>
           </div>
         </div>
       </section>
 
-      <h2 class="section-title-custom">Active listings</h2>
+      <h2 class="section-title-custom">My rentals</h2>
+
+      <section class="dashboard-grid">
+        <div class="mini-card">
+          <h3>Current rental</h3>
+          <ul>
+            <li>Cordless Drill — €9 / day</li>
+            <li>Owner: Anna K.</li>
+            <li>Pickup arranged for tomorrow</li>
+            <li>Status: awaiting confirmation</li>
+          </ul>
+        </div>
+
+        <div class="mini-card">
+          <h3>Saved items</h3>
+          <ul>
+            <li>DSLR Camera</li>
+            <li>Occasion Heels</li>
+            <li>Portable Work Light</li>
+            <li>Basic Tool Set</li>
+          </ul>
+        </div>
+      </section>
+
+      <h2 class="section-title-custom">My listings</h2>
 
       <section class="listing-grid">
         <article class="listing-card">
@@ -387,47 +408,50 @@
         </article>
 
         <article class="listing-card">
-          <a href="./rent.html" class="listing-link">
+          <a href="./camera.html" class="listing-link">
             <img src="./camera.png" alt="DSLR Camera" />
             <div class="listing-body">
               <div class="listing-category">Electronics</div>
-              <div class="listing-title">Portable Work Light</div>
-              <div class="listing-rating">★★★★☆ 4.6 (8 reviews)</div>
-              <div class="listing-price">€5 / day</div>
+              <div class="listing-title">DSLR Camera</div>
+              <div class="listing-rating">★★★★★ 5.0 (18 reviews)</div>
+              <div class="listing-price">€18 / day</div>
             </div>
           </a>
         </article>
 
         <article class="listing-card">
-          <a href="./rent.html" class="listing-link">
-            <img src="./drill.png" alt="Tool Set" />
+          <a href="./heels.html" class="listing-link">
+            <img src="./heels.png" alt="Occasion Heels" />
             <div class="listing-body">
-              <div class="listing-category">Tools</div>
-              <div class="listing-title">Basic Tool Set</div>
-              <div class="listing-rating">★★★★☆ 4.8 (14 reviews)</div>
-              <div class="listing-price">€7 / day</div>
+              <div class="listing-category">Clothing</div>
+              <div class="listing-title">Occasion Heels</div>
+              <div class="listing-rating">★★★☆☆ 3.5 (12 reviews)</div>
+              <div class="listing-price">€6 / day</div>
             </div>
           </a>
         </article>
       </section>
 
-      <h2 class="section-title-custom">Recent reviews</h2>
+      <h2 class="section-title-custom">Messages preview</h2>
 
-      <section class="review-grid">
-        <div class="review-card">
-          <div class="review-head">Lena • Shelf installation</div>
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">
-            Super easy pickup and the drill worked perfectly. Everything was exactly as described.
-          </div>
+      <section class="dashboard-grid">
+        <div class="mini-card">
+          <h3>Inbox</h3>
+          <ul>
+            <li>Anna K. — “Tomorrow pickup works for me.”</li>
+            <li>Leon M. — “Camera available this weekend.”</li>
+            <li>Mila S. — “Heels available for Saturday.”</li>
+          </ul>
         </div>
 
-        <div class="review-card">
-          <div class="review-head">Marco • Weekend repair work</div>
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">
-            Very smooth experience. Anna replied quickly and the item was ready right away.
-          </div>
+        <div class="mini-card">
+          <h3>Account settings</h3>
+          <ul>
+            <li>Email notifications: enabled</li>
+            <li>Preferred city: Berlin</li>
+            <li>Language: English</li>
+            <li>Payment method: saved</li>
+          </ul>
         </div>
       </section>
     </div>
