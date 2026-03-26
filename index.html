@@ -110,11 +110,9 @@
 
     .hero {
       position: relative;
-      padding: 100px 0 90px;
-      background:
-        linear-gradient(rgba(255,255,255,0.86), rgba(255,255,255,0.86)),
-        url("hero.png") center center / cover no-repeat;
       overflow: hidden;
+      padding: 100px 0 90px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
     }
 
     .hero::before {
@@ -122,9 +120,24 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at top left, rgba(30,58,138,0.10), transparent 25%),
-        radial-gradient(circle at bottom right, rgba(249,115,22,0.10), transparent 28%);
+        radial-gradient(circle at top left, rgba(30,58,138,0.08), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(249,115,22,0.08), transparent 28%);
       pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 40px;
+      right: -140px;
+      width: 62%;
+      height: 88%;
+      background: url("hero.png") right center / contain no-repeat;
+      opacity: 0.14;
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(0.2px);
     }
 
     .hero-content {
@@ -440,11 +453,11 @@
       .steps, .split, .faq-grid { grid-template-columns: 1fr; }
       .pill-grid { grid-template-columns: 1fr; }
       .nav { display: none; }
-      .hero {
-        padding: 72px 0 64px;
-        background:
-          linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
-          url("hero.png") center center / cover no-repeat;
+      .hero::after {
+        width: 90%;
+        right: -180px;
+        top: 80px;
+        opacity: 0.08;
       }
     }
 
@@ -456,6 +469,12 @@
       .hero { padding-top: 48px; }
       h1 { font-size: clamp(42px, 14vw, 64px); }
       .subtext { font-size: 18px; }
+      .hero::after {
+        width: 120%;
+        right: -220px;
+        top: 110px;
+        opacity: 0.06;
+      }
     }
   </style>
 </head>
