@@ -503,7 +503,9 @@
         <a href="#why">Why TakeMine</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="btn btn-primary" href="mailto:info@takemine.de?subject=Join%20TakeMine">Join waitlist</a>
+      <a class="btn btn-primary" onclick="openModal()">
+  Join waitlist
+</a>
     </div>
   </header>
 
@@ -659,5 +661,77 @@
       </div>
     </div>
   </footer>
+
+  <div id="modal" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    z-index:999;
+    align-items:center;
+    justify-content:center;
+  ">
+    <div style="
+      background:white;
+      padding:30px;
+      border-radius:20px;
+      max-width:400px;
+      width:90%;
+      box-shadow:0 20px 50px rgba(0,0,0,0.2);
+    ">
+
+      <h2 style="margin-top:0;">Join TakeMine 🚀</h2>
+      <p style="color:#64748b;">Get early access before launch</p>
+
+      <input id="emailInput"
+        placeholder="Enter your email"
+        style="
+          width:100%;
+          padding:14px;
+          margin-top:10px;
+          border:1px solid #e2e8f0;
+          border-radius:12px;
+          font-size:16px;
+        "
+      />
+
+      <button onclick="submitEmail()"
+        style="
+          margin-top:15px;
+          width:100%;
+          padding:14px;
+          background:#f97316;
+          color:white;
+          border:none;
+          border-radius:12px;
+          font-weight:bold;
+          font-size:16px;
+          cursor:pointer;
+        ">
+        Join waitlist
+      </button>
+
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function submitEmail() {
+      const email = document.getElementById("emailInput").value;
+
+      if (!email) {
+        alert("Please enter your email");
+        return;
+      }
+
+      alert("You're on the waitlist 🚀");
+
+      document.getElementById("modal").style.display = "none";
+    }
+  </script>
+
 </body>
 </html>
