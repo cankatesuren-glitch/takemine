@@ -112,32 +112,30 @@
       position: relative;
       overflow: hidden;
       padding: 100px 0 90px;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
       background:
         radial-gradient(circle at top left, rgba(30,58,138,0.08), transparent 24%),
-        radial-gradient(circle at bottom right, rgba(249,115,22,0.08), transparent 28%);
+        radial-gradient(circle at bottom right, rgba(249,115,22,0.08), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
       pointer-events: none;
       z-index: 1;
     }
 
-    .hero::after {
+    .hero-bg::after {
       content: "";
       position: absolute;
-      top: 40px;
-      right: -140px;
-      width: 62%;
-      height: 88%;
-      background: url("hero.png") right center / contain no-repeat;
-      opacity: 0.14;
-      pointer-events: none;
-      z-index: 1;
-      filter: blur(0.2px);
+      top: 50%;
+      right: -40px;
+      width: 760px;
+      height: 520px;
+      transform: translateY(-50%);
+      background: url("hero.png") center center / contain no-repeat;
+      opacity: 0.10;
+      filter: blur(0.3px);
     }
 
     .hero-content {
@@ -453,11 +451,13 @@
       .steps, .split, .faq-grid { grid-template-columns: 1fr; }
       .pill-grid { grid-template-columns: 1fr; }
       .nav { display: none; }
-      .hero::after {
-        width: 90%;
-        right: -180px;
-        top: 80px;
-        opacity: 0.08;
+
+      .hero-bg::after {
+        width: 520px;
+        height: 360px;
+        right: -120px;
+        top: 58%;
+        opacity: 0.07;
       }
     }
 
@@ -469,11 +469,13 @@
       .hero { padding-top: 48px; }
       h1 { font-size: clamp(42px, 14vw, 64px); }
       .subtext { font-size: 18px; }
-      .hero::after {
-        width: 120%;
-        right: -220px;
-        top: 110px;
-        opacity: 0.06;
+
+      .hero-bg::after {
+        width: 420px;
+        height: 300px;
+        right: -160px;
+        top: 62%;
+        opacity: 0.05;
       }
     }
   </style>
@@ -494,6 +496,8 @@
 
   <main id="top">
     <section class="hero">
+      <div class="hero-bg"></div>
+
       <div class="container">
         <div class="hero-content">
           <div class="eyebrow">AI-powered rental marketplace in Germany</div>
