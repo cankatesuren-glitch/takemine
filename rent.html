@@ -95,14 +95,24 @@
       box-shadow: var(--shadow-strong);
     }
 
+    .product-link {
+      display: block;
+    }
+
     .product-image {
       height: 220px;
       background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 54px;
       overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .product-body {
@@ -140,7 +150,7 @@
     }
 
     .product-footer {
-      margin-top: 16px;
+      padding: 0 18px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -152,13 +162,6 @@
       font-size: 20px;
       font-weight: 900;
       color: var(--brand);
-    }
-
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
     }
 
     .demo-banner {
@@ -247,22 +250,24 @@
 
       <section class="product-grid">
         <article class="product-card">
-          <div class="product-image">
-            <img src="./drill.png" alt="Cordless Drill" />
-          </div>
-          <div class="product-body">
-            <div class="product-category">Tools</div>
-            <div class="product-title">Cordless Drill</div>
-            <div class="product-rating">★★★★★ 5.0 (25 reviews)</div>
-            <div class="product-meta">
-              Available in Berlin • Great for small home repairs and quick DIY jobs.
+          <a href="./drill.html" class="product-link">
+            <div class="product-image">
+              <img src="./drill.png" alt="Cordless Drill" />
             </div>
-            <div class="product-footer">
-              <div class="price">€9 / day</div>
-              <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
-                Rent now
-              </a>
+            <div class="product-body">
+              <div class="product-category">Tools</div>
+              <div class="product-title">Cordless Drill</div>
+              <div class="product-rating">★★★★★ 5.0 (25 reviews)</div>
+              <div class="product-meta">
+                Available in Berlin • Great for small home repairs and quick DIY jobs.
+              </div>
             </div>
+          </a>
+          <div class="product-footer">
+            <div class="price">€9 / day</div>
+            <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
+              Rent now
+            </a>
           </div>
         </article>
 
@@ -277,12 +282,12 @@
             <div class="product-meta">
               Perfect for trips, events, or content creation without buying expensive gear.
             </div>
-            <div class="product-footer">
-              <div class="price">€18 / day</div>
-              <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
-                Rent now
-              </a>
-            </div>
+          </div>
+          <div class="product-footer">
+            <div class="price">€18 / day</div>
+            <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
+              Rent now
+            </a>
           </div>
         </article>
 
@@ -297,12 +302,12 @@
             <div class="product-meta">
               Stylish rental option for events, dinners, weddings, or one-time use.
             </div>
-            <div class="product-footer">
-              <div class="price">€12 / day</div>
-              <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
-                Rent now
-              </a>
-            </div>
+          </div>
+          <div class="product-footer">
+            <div class="price">€12 / day</div>
+            <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
+              Rent now
+            </a>
           </div>
         </article>
       </section>
