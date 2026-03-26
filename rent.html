@@ -1,1 +1,303 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rent on TakeMine</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    .demo-page {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      padding: 40px 0 80px;
+    }
+
+    .demo-hero {
+      margin-top: 24px;
+      margin-bottom: 28px;
+    }
+
+    .demo-title {
+      font-size: clamp(34px, 5vw, 58px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin: 0;
+      color: var(--brand);
+    }
+
+    .demo-subtext {
+      margin-top: 14px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .search-box {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 260px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      font-size: 16px;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .filter-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .demo-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .product-grid {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: 0.25s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .product-image {
+      height: 220px;
+      background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 54px;
+    }
+
+    .product-body {
+      padding: 18px;
+    }
+
+    .product-category {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .product-title {
+      margin-top: 8px;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .product-meta {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .product-footer {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--brand);
+    }
+
+    .demo-banner {
+      margin-top: 42px;
+      padding: 24px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: white;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .demo-banner-title {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .demo-banner-text {
+      margin-top: 10px;
+      color: #dbeafe;
+      line-height: 1.8;
+      max-width: 760px;
+    }
+
+    @media (max-width: 980px) {
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="./index.html" class="logo">TakeMine</a>
+
+      <nav class="nav">
+        <a href="./index.html#how">How it works</a>
+        <a href="./index.html#categories">Categories</a>
+        <a href="./index.html#why">Why TakeMine</a>
+        <a href="./index.html#faq">FAQ</a>
+      </nav>
+
+      <a class="btn btn-primary" href="https://tally.so/r/q4OkD7" target="_blank" rel="noopener noreferrer">
+        Join waitlist
+      </a>
+    </div>
+  </header>
+
+  <main class="demo-page">
+    <div class="container">
+      <section class="demo-hero">
+        <div class="section-label">Demo customer experience</div>
+        <h1 class="demo-title">Rent what you need, nearby.</h1>
+        <p class="demo-subtext">
+          This is a preview of how TakeMine could look for customers in the future.
+          Search everyday items, browse categories, and rent from people nearby.
+        </p>
+
+        <div class="search-box">
+          <input class="search-input" type="text" placeholder="Search for tools, electronics, clothing..." />
+          <a class="btn btn-primary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
+            Join as renter
+          </a>
+        </div>
+
+        <div class="filters">
+          <span class="filter-chip">Berlin</span>
+          <span class="filter-chip">Tools</span>
+          <span class="filter-chip">Electronics</span>
+          <span class="filter-chip">Clothing</span>
+          <span class="filter-chip">Garden</span>
+          <span class="filter-chip">AI suggestions</span>
+        </div>
+
+        <div class="demo-note">
+          Demo only — product cards below are preview examples.
+        </div>
+      </section>
+
+      <section class="product-grid">
+        <article class="product-card">
+          <div class="product-image">🛠️</div>
+          <div class="product-body">
+            <div class="product-category">Tools</div>
+            <div class="product-title">Cordless Drill</div>
+            <div class="product-meta">
+              Available in Berlin • Great for small home repairs and quick DIY jobs.
+            </div>
+            <div class="product-footer">
+              <div class="price">€9 / day</div>
+              <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
+                Rent now
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">📷</div>
+          <div class="product-body">
+            <div class="product-category">Electronics</div>
+            <div class="product-title">DSLR Camera</div>
+            <div class="product-meta">
+              Perfect for trips, events, or content creation without buying expensive gear.
+            </div>
+            <div class="product-footer">
+              <div class="price">€18 / day</div>
+              <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
+                Rent now
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">👠</div>
+          <div class="product-body">
+            <div class="product-category">Clothing</div>
+            <div class="product-title">Occasion Heels</div>
+            <div class="product-meta">
+              Stylish rental option for events, dinners, weddings, or one-time use.
+            </div>
+            <div class="product-footer">
+              <div class="price">€12 / day</div>
+              <a class="btn btn-secondary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
+                Rent now
+              </a>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="demo-banner">
+        <div class="demo-banner-title">Want access when this goes live?</div>
+        <div class="demo-banner-text">
+          Join the waitlist to be among the first users in Berlin and get notified when the customer experience launches.
+        </div>
+        <div style="margin-top: 18px;">
+          <a class="btn btn-primary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
+            Join the renter waitlist
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
