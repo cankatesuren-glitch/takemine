@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anna K. | Take Mine</title>
+  <meta name="description" content="Preview the owner profile page for Anna K. on Take Mine." />
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    .profile-page {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      padding: 44px 0 84px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .back-link:hover {
+      color: var(--brand);
+    }
+
+    .profile-hero {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .profile-card,
+    .profile-side,
+    .listing-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-card {
+      padding: 28px;
+    }
+
+    .avatar {
+      width: 84px;
+      height: 84px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .profile-name {
+      margin-top: 18px;
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    .profile-rating {
+      margin-top: 10px;
+      color: #f59e0b;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .profile-meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .meta-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .profile-bio {
+      margin-top: 18px;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 16px;
+    }
+
+    .profile-actions {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .profile-side {
+      padding: 28px;
+    }
+
+    .side-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .stat-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .stat-box {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      background: #fcfdff;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .stat-value {
+      margin-top: 8px;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--brand);
+      letter-spacing: -0.03em;
+    }
+
+    .trust-box {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: white;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .trust-box strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .trust-box span {
+      display: block;
+      margin-top: 8px;
+      color: #dbeafe;
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .section-title-custom {
+      margin-top: 40px;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .listing-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .listing-card {
+      overflow: hidden;
+      transition: 0.25s ease;
+    }
+
+    .listing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .listing-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      display: block;
+      background: linear-gradient(135deg, #eef2f7 0%, #f8fafc 100%);
+      padding: 18px;
+    }
+
+    .listing-body {
+      padding: 18px;
+    }
+
+    .listing-category {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .listing-title {
+      margin-top: 8px;
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .listing-rating {
+      margin-top: 8px;
+      color: #f59e0b;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .listing-price {
+      margin-top: 12px;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--brand);
+    }
+
+    .listing-link {
+      display: block;
+    }
+
+    .review-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .review-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .review-head {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .review-stars {
+      margin-top: 8px;
+      color: #f59e0b;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .review-text {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    @media (max-width: 980px) {
+      .profile-hero,
+      .listing-grid,
+      .review-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="./index.html" class="logo">TakeMine</a>
+
+      <nav class="nav">
+        <a href="./index.html#how">How it works</a>
+        <a href="./index.html#categories">Categories</a>
+        <a href="./index.html#why">Why TakeMine</a>
+        <a href="./index.html#faq">FAQ</a>
+      </nav>
+
+      <a class="btn btn-primary" href="https://tally.so/r/q4OkD7" target="_blank" rel="noopener noreferrer">
+        Join waitlist
+      </a>
+    </div>
+  </header>
+
+  <main class="profile-page">
+    <div class="container">
+      <a href="./drill.html" class="back-link">← Back to item</a>
+
+      <section class="profile-hero">
+        <div class="profile-card">
+          <div class="avatar">AK</div>
+
+          <div class="profile-name">Anna K.</div>
+          <div class="profile-rating">★★★★★ 5.0 (25 reviews)</div>
+
+          <div class="profile-meta">
+            <span class="meta-chip">Berlin Mitte</span>
+            <span class="meta-chip">Member since 2024</span>
+            <span class="meta-chip">Usually responds in 1 hour</span>
+            <span class="meta-chip">3 active listings</span>
+          </div>
+
+          <p class="profile-bio">
+            I like sharing practical items that people often need only once in a while.
+            Most of my listings are for home projects, small repairs, and everyday tasks.
+            I keep everything clean, ready for pickup, and easy to use.
+          </p>
+
+          <div class="profile-actions">
+            <a class="btn btn-primary" href="mailto:info@takemine.de?subject=Contact%20Anna%20K.">
+              Contact owner
+            </a>
+            <a class="btn btn-secondary" href="./drill.html">
+              View listed item
+            </a>
+          </div>
+        </div>
+
+        <div class="profile-side">
+          <div class="side-title">Owner snapshot</div>
+
+          <div class="stat-grid">
+            <div class="stat-box">
+              <div class="stat-label">Response rate</div>
+              <div class="stat-value">98%</div>
+            </div>
+
+            <div class="stat-box">
+              <div class="stat-label">Repeat renters</div>
+              <div class="stat-value">11</div>
+            </div>
+
+            <div class="stat-box">
+              <div class="stat-label">Completed rentals</div>
+              <div class="stat-value">32</div>
+            </div>
+
+            <div class="stat-box">
+              <div class="stat-label">Avg. rating</div>
+              <div class="stat-value">5.0</div>
+            </div>
+          </div>
+
+          <div class="trust-box">
+            <strong>Why people trust Anna</strong>
+            <span>
+              Quick replies, well-maintained items, flexible pickup, and clear communication.
+              A reliable owner profile for practical local rentals.
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <h2 class="section-title-custom">Active listings</h2>
+
+      <section class="listing-grid">
+        <article class="listing-card">
+          <a href="./drill.html" class="listing-link">
+            <img src="./drill.png" alt="Cordless Drill" />
+            <div class="listing-body">
+              <div class="listing-category">Tools</div>
+              <div class="listing-title">Cordless Drill</div>
+              <div class="listing-rating">★★★★★ 5.0 (25 reviews)</div>
+              <div class="listing-price">€9 / day</div>
+            </div>
+          </a>
+        </article>
+
+        <article class="listing-card">
+          <a href="./rent.html" class="listing-link">
+            <img src="./camera.png" alt="DSLR Camera" />
+            <div class="listing-body">
+              <div class="listing-category">Electronics</div>
+              <div class="listing-title">Portable Work Light</div>
+              <div class="listing-rating">★★★★☆ 4.6 (8 reviews)</div>
+              <div class="listing-price">€5 / day</div>
+            </div>
+          </a>
+        </article>
+
+        <article class="listing-card">
+          <a href="./rent.html" class="listing-link">
+            <img src="./drill.png" alt="Tool Set" />
+            <div class="listing-body">
+              <div class="listing-category">Tools</div>
+              <div class="listing-title">Basic Tool Set</div>
+              <div class="listing-rating">★★★★☆ 4.8 (14 reviews)</div>
+              <div class="listing-price">€7 / day</div>
+            </div>
+          </a>
+        </article>
+      </section>
+
+      <h2 class="section-title-custom">Recent reviews</h2>
+
+      <section class="review-grid">
+        <div class="review-card">
+          <div class="review-head">Lena • Shelf installation</div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">
+            Super easy pickup and the drill worked perfectly. Everything was exactly as described.
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-head">Marco • Weekend repair work</div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">
+            Very smooth experience. Anna replied quickly and the item was ready right away.
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 TakeMine</div>
+      <div class="footer-links">
+        <a href="./index.html">Home</a>
+        <a href="./rent.html">Rentals</a>
+        <a href="mailto:info@takemine.de">info@takemine.de</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
