@@ -1,3 +1,18 @@
+Evet, bunun yerine aşağıdaki tam son halini kullan.
+Bu versiyonda:
+	•	slogan: “Don’t buy, Take Mine.”
+	•	“Don’t buy,” rengi: #f3f4f6
+	•	TakeMine üst logo rengi: #1e3a8a
+	•	I want to rent butonu: #f97316
+	•	butonlar tıklanabilir
+	•	görsel arka plan gibi kullanılıyor
+	•	sağda ayrı kart gibi durmuyor
+
+Önemli: Bu kodda görsel dosya adı hero.png olarak geçiyor.
+Senin repo’da dosya zaten hero.png olarak root’ta duruyorsa bu kod direkt çalışır.
+
+Bunu index.html içindeki her şeyin yerine yapıştır:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,14 +36,18 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: Inter, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
     }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
     .container {
       width: min(1140px, calc(100% - 32px));
@@ -39,7 +58,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255,255,255,0.88);
+      background: rgba(255,255,255,0.90);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
@@ -66,7 +85,9 @@
       font-size: 14px;
     }
 
-    .nav a:hover { color: var(--brand); }
+    .nav a:hover {
+      color: var(--brand);
+    }
 
     .btn {
       display: inline-flex;
@@ -104,25 +125,35 @@
 
     .hero {
       position: relative;
-      overflow: hidden;
-      padding: 70px 0 40px;
+      padding: 100px 0 90px;
       background:
-        radial-gradient(circle at top left, rgba(30,58,138,0.10), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(249,115,22,0.10), transparent 30%);
+        linear-gradient(rgba(255,255,255,0.86), rgba(255,255,255,0.86)),
+        url("hero.png") center center / cover no-repeat;
+      overflow: hidden;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: center;
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(30,58,138,0.10), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(249,115,22,0.10), transparent 28%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      animation: fadeUp 0.8s ease both;
     }
 
     .eyebrow {
       display: inline-flex;
       padding: 8px 14px;
       border-radius: 999px;
-      background: white;
+      background: rgba(255,255,255,0.92);
       border: 1px solid var(--line);
       color: var(--muted);
       font-size: 14px;
@@ -131,15 +162,18 @@
     }
 
     h1 {
-      margin: 18px 0 0;
-      font-size: clamp(42px, 7vw, 82px);
-      line-height: 0.98;
+      margin: 20px 0 0;
+      font-size: clamp(48px, 8vw, 96px);
+      line-height: 0.95;
       letter-spacing: -0.05em;
       font-weight: 900;
-      animation: fadeUp 0.85s ease both;
     }
 
-    .headline-light { color: var(--headline-light); }
+    .headline-light {
+      color: var(--headline-light);
+      display: inline-block;
+    }
+
     .headline-brand {
       color: var(--brand);
       display: inline-block;
@@ -156,7 +190,7 @@
       font-size: 20px;
       line-height: 1.8;
       color: var(--muted);
-      max-width: 640px;
+      max-width: 720px;
       animation: fadeUp 1s ease both;
     }
 
@@ -185,30 +219,16 @@
       font-size: 14px;
     }
 
-    .hero-visual {
-      position: relative;
-      animation: fadeUp 1s ease both;
-    }
-
-    .hero-image {
-      border-radius: 32px;
-      overflow: hidden;
-      box-shadow: var(--shadow-strong);
-      border: 1px solid var(--line);
-      background: white;
-    }
-
     .floating-card {
-      position: absolute;
-      left: -18px;
-      bottom: 18px;
+      margin-top: 24px;
+      display: inline-block;
       background: rgba(255,255,255,0.95);
       backdrop-filter: blur(12px);
       border: 1px solid var(--line);
       border-radius: 20px;
       box-shadow: var(--shadow);
       padding: 16px;
-      width: 220px;
+      max-width: 280px;
       animation: floaty 4s ease-in-out infinite;
     }
 
@@ -331,8 +351,16 @@
       box-shadow: var(--shadow-strong);
     }
 
-    .ai-box p, .ai-box li { color: #dbeafe; line-height: 1.8; }
-    .ai-box ul { margin: 18px 0 0; padding-left: 18px; }
+    .ai-box p,
+    .ai-box li {
+      color: #dbeafe;
+      line-height: 1.8;
+    }
+
+    .ai-box ul {
+      margin: 18px 0 0;
+      padding-left: 18px;
+    }
 
     .why {
       background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
@@ -424,10 +452,15 @@
     }
 
     @media (max-width: 980px) {
-      .hero-grid, .steps, .split, .faq-grid { grid-template-columns: 1fr; }
+      .steps, .split, .faq-grid { grid-template-columns: 1fr; }
       .pill-grid { grid-template-columns: 1fr; }
       .nav { display: none; }
-      .floating-card { position: static; width: 100%; margin-top: 16px; }
+      .hero {
+        padding: 72px 0 64px;
+        background:
+          linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
+          url("hero.png") center center / cover no-repeat;
+      }
     }
 
     @media (max-width: 560px) {
@@ -436,6 +469,8 @@
       .actions { flex-direction: column; }
       .btn { width: 100%; }
       .hero { padding-top: 48px; }
+      h1 { font-size: clamp(42px, 14vw, 64px); }
+      .subtext { font-size: 18px; }
     }
   </style>
 </head>
@@ -455,14 +490,16 @@
 
   <main id="top">
     <section class="hero">
-      <div class="container hero-grid">
-        <div>
+      <div class="container">
+        <div class="hero-content">
           <div class="eyebrow">AI-powered rental marketplace in Germany</div>
+
           <h1>
             <span class="headline-light">Don't buy,</span>
             <br />
             <span class="headline-brand">Take Mine.</span>
           </h1>
+
           <p class="subtext">
             Rent everyday items from people nearby — tools, garden products, clothing, electronics, and more.
             Save money when you rent, earn money when you lend.
@@ -478,12 +515,7 @@
             <span class="tag">AI suggestions</span>
             <span class="tag">Local renting</span>
           </div>
-        </div>
 
-        <div class="hero-visual">
-          <div class="hero-image">
-            <img src="hero.png" alt="TakeMine marketplace preview" />
-          </div>
           <div class="floating-card">
             <strong>Launch focus</strong>
             <span>Start with Berlin, validate demand, then expand across Germany with smarter AI-assisted renting.</span>
