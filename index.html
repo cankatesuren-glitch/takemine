@@ -1,68 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>TakeMine</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      margin: 0;
-      background: #ffffff;
-      color: #111;
-    }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 60px 20px;
-    }
-    h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
-    p {
-      font-size: 18px;
-      color: #555;
-    }
-    .buttons {
-      margin-top: 30px;
-    }
-    .btn {
-      padding: 12px 20px;
-      border-radius: 12px;
-      text-decoration: none;
-      margin-right: 10px;
-      display: inline-block;
-    }
-    .primary {
-      background: #111;
-      color: white;
-    }
-    .secondary {
-      border: 1px solid #ccc;
-      color: #111;
-    }
-  </style>
-</head>
-<body>
+export default function TakeMineLandingPage() {
+  return (
+    <div className="min-h-screen bg-white text-slate-900">
+      <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <div className="text-2xl font-bold tracking-tight">TakeMine</div>
+          <nav className="hidden gap-8 text-sm md:flex">
+            <a href="#how" className="hover:text-slate-600">How it works</a>
+            <a href="#owners" className="hover:text-slate-600">For owners</a>
+            <a href="#renters" className="hover:text-slate-600">For renters</a>
+            <a href="#faq" className="hover:text-slate-600">FAQ</a>
+          </nav>
+          <a
+            href="mailto:info@takemine.de?subject=Join%20TakeMine"
+            className="rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
+          >
+            Join waitlist
+          </a>
+        </div>
+      </header>
 
-<div class="container">
-  <h1>Don’t buy it.<br>TakeMine it.</h1>
+      <main>
+        <section className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-2 md:items-center">
+          <div>
+            <div className="mb-4 inline-flex rounded-full border border-slate-200 px-3 py-1 text-sm text-slate-600">
+              AI-powered rental marketplace in Germany
+            </div>
+            <h1 className="animate-in fade-in slide-in-from-bottom-4 duration-700 text-5xl font-black leading-tight tracking-tight md:text-6xl">
+              Don&apos;t buy it.
+              <br />
+              <span className="inline-block text-slate-500 transition duration-500 hover:-translate-y-1 hover:text-slate-700">Take Mine.</span>
+            </h1>
+            <p className="animate-in fade-in slide-in-from-bottom-4 delay-150 duration-700 mt-6 max-w-xl text-lg leading-8 text-slate-600">
+              Rent everyday items from people nearby — tools, garden products, clothing, electronics, and more.
+              Save money when you rent, earn money when you lend.
+            </p>
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="mailto:info@takemine.de?subject=I%20want%20to%20rent%20with%20TakeMine"
+                className="rounded-2xl bg-slate-900 px-6 py-3 text-center font-medium text-white shadow-lg shadow-slate-900/10 transition duration-300 hover:-translate-y-1 hover:bg-slate-800"
+              >
+                I want to rent
+              </a>
+              <a
+                href="mailto:info@takemine.de?subject=I%20want%20to%20list%20an%20item%20on%20TakeMine"
+                className="rounded-2xl border border-slate-300 px-6 py-3 text-center font-medium transition duration-300 hover:-translate-y-1 hover:bg-slate-50"
+              >
+                List an item
+              </a>
+            </div>
+            <p className="mt-4 text-sm text-slate-500">Starting with Berlin, expanding across Germany.</p>
+          </div>
 
-  <p>
-    Rent everyday items from people nearby — tools, garden products,
-    clothing, electronics, and more.
-  </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              ["Tools", "Drills, ladders, pressure washers"],
+              ["Garden", "Lawn mowers, trimmers, leaf blowers"],
+              ["Clothing", "Event outfits, occasion wear"],
+              ["Electronics", "Cameras, projectors, speakers"],
+            ].map(([title, text]) => (
+              <div key={title} className="rounded-3xl border border-slate-200 p-6 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div className="text-xl font-semibold">{title}</div>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-  <div class="buttons">
-    <a class="btn primary" href="mailto:info@takemine.de">I want to rent</a>
-    <a class="btn secondary" href="mailto:info@takemine.de">List an item</a>
-  </div>
+        <section id="how" className="border-y border-slate-200 bg-slate-50">
+          <div className="mx-auto max-w-6xl px-6 py-20">
+            <h2 className="text-3xl font-bold tracking-tight">How it works</h2>
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {[
+                ["1. Find or list", "Search for what you need nearby, or upload an item you want to rent out."],
+                ["2. Match faster with AI", "Get smart category, pricing, and demand suggestions."],
+                ["3. Rent with confidence", "Pick up locally, use what you need, and return it."],
+              ].map(([title, text]) => (
+                <div key={title} className="rounded-3xl bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-lg">
+                  <div className="text-lg font-semibold">{title}</div>
+                  <p className="mt-3 text-slate-600">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-  <p style="margin-top:40px;">
-    📍 Starting with Germany
-  </p>
-</div>
+        <section className="mx-auto max-w-6xl px-6 py-20" id="owners">
+          <div className="grid gap-10 md:grid-cols-2">
+            <div className="rounded-3xl border border-slate-200 p-8 shadow-sm">
+              <div className="text-sm font-medium uppercase tracking-wider text-slate-500">For owners</div>
+              <h3 className="mt-3 text-3xl font-bold">Turn unused items into income</h3>
+              <ul className="mt-6 space-y-4 text-slate-600">
+                <li>Upload a photo and create a listing faster.</li>
+                <li>Use AI pricing suggestions based on category and demand.</li>
+                <li>Reach local renters without selling your item.</li>
+              </ul>
+            </div>
+            <div className="rounded-3xl border border-slate-200 p-8 shadow-sm" id="renters">
+              <div className="text-sm font-medium uppercase tracking-wider text-slate-500">For renters</div>
+              <h3 className="mt-3 text-3xl font-bold">Access what you need without buying</h3>
+              <ul className="mt-6 space-y-4 text-slate-600">
+                <li>Rent nearby items for a fraction of the purchase cost.</li>
+                <li>Avoid storage headaches for rarely used products.</li>
+                <li>Discover relevant options faster with smarter search.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
-</body>
-</html>
+        <section className="bg-slate-900 text-white">
+          <div className="mx-auto max-w-6xl px-6 py-20">
+            <div className="max-w-3xl">
+              <div className="text-sm font-medium uppercase tracking-wider text-slate-300">Why TakeMine</div>
+              <h2 className="mt-3 text-4xl font-bold tracking-tight">Not just another listing site</h2>
+              <p className="mt-6 text-lg leading-8 text-slate-300">
+                TakeMine is designed to become the AI layer for renting physical items locally. Our vision is to help users decide what to rent, when to list, and how to price — not just browse static listings.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" className="mx-auto max-w-6xl px-6 py-20">
+          <h2 className="text-3xl font-bold tracking-tight">FAQ</h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {[
+              ["Where is TakeMine launching first?", "We are starting with Germany, with an initial focus on Berlin."],
+              ["What can be rented?", "Everyday items except housing — including tools, garden products, clothing, and electronics."],
+              ["How do I join early?", "Send us an email and we’ll add you to the early access list."],
+              ["How do I contact you?", "Reach us at info@takemine.de."],
+            ].map(([q, a]) => (
+              <div key={q} className="rounded-3xl border border-slate-200 p-6 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div className="font-semibold">{q}</div>
+                <p className="mt-3 text-slate-600">{a}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-slate-200">
+        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-8 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
+          <div>© 2026 TakeMine</div>
+          <div className="flex gap-6">
+            <a href="mailto:info@takemine.de" className="hover:text-slate-700">info@takemine.de</a>
+            <a href="#" className="hover:text-slate-700">Impressum</a>
+            <a href="#" className="hover:text-slate-700">Privacy</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
