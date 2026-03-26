@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,6 +102,7 @@
       align-items: center;
       justify-content: center;
       font-size: 54px;
+      overflow: hidden;
     }
 
     .product-body {
@@ -125,6 +125,13 @@
       color: var(--text);
     }
 
+    .product-rating {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #f59e0b;
+      font-weight: 700;
+    }
+
     .product-meta {
       margin-top: 10px;
       color: var(--muted);
@@ -145,6 +152,13 @@
       font-size: 20px;
       font-weight: 900;
       color: var(--brand);
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .demo-banner {
@@ -233,10 +247,13 @@
 
       <section class="product-grid">
         <article class="product-card">
-          <div class="product-image">🛠️</div>
+          <div class="product-image">
+            <img src="./drill.png" alt="Cordless Drill" />
+          </div>
           <div class="product-body">
             <div class="product-category">Tools</div>
             <div class="product-title">Cordless Drill</div>
+            <div class="product-rating">★★★★★ 5.0 (25 reviews)</div>
             <div class="product-meta">
               Available in Berlin • Great for small home repairs and quick DIY jobs.
             </div>
@@ -250,10 +267,13 @@
         </article>
 
         <article class="product-card">
-          <div class="product-image">📷</div>
+          <div class="product-image">
+            <img src="./camera.png" alt="DSLR Camera" />
+          </div>
           <div class="product-body">
             <div class="product-category">Electronics</div>
             <div class="product-title">DSLR Camera</div>
+            <div class="product-rating">★★★★★ 5.0 (18 reviews)</div>
             <div class="product-meta">
               Perfect for trips, events, or content creation without buying expensive gear.
             </div>
@@ -267,10 +287,13 @@
         </article>
 
         <article class="product-card">
-          <div class="product-image">👠</div>
+          <div class="product-image">
+            <img src="./heels.png" alt="Occasion Heels" />
+          </div>
           <div class="product-body">
             <div class="product-category">Clothing</div>
             <div class="product-title">Occasion Heels</div>
+            <div class="product-rating">★★★★★ 5.0 (32 reviews)</div>
             <div class="product-meta">
               Stylish rental option for events, dinners, weddings, or one-time use.
             </div>
