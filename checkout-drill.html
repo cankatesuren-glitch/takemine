@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout | Cordless Drill | TakeMine</title>
-  <meta name="description" content="Complete your Cordless Drill booking on TakeMine." />
+  <title>Request Booking | Cordless Drill | TakeMine</title>
+  <meta name="description" content="Send a booking request for the Cordless Drill on TakeMine." />
   <link rel="stylesheet" href="./styles.css" />
   <style>
     .checkout-page {
@@ -250,7 +250,7 @@
 
       <section class="checkout-grid">
         <div class="checkout-card">
-          <div class="section-head">Booking summary</div>
+          <div class="section-head">Booking request summary</div>
 
           <div class="product-mini">
             <img src="./drill.png" alt="Cordless Drill" />
@@ -282,8 +282,8 @@
 
           <div class="summary-total">
             <div class="summary-row">
-              <span>Total charged now</span>
-              <strong id="totalNow">€40</strong>
+              <span>Total after approval</span>
+              <strong id="totalAfterApproval">€40</strong>
             </div>
             <div class="summary-row" style="margin-top: 8px;">
               <span>Refundable after return</span>
@@ -292,16 +292,16 @@
           </div>
 
           <div class="summary-note">
-            <strong>Protected by TakeMine</strong>
+            <strong>Request first, payment later</strong>
             <span>
-              This booking uses secure payment, a refundable deposit, and documented pickup/return
-              to support fair issue resolution.
+              Your booking request will be sent to the owner first. Payment should only be charged
+              after the owner accepts the request and pickup details are confirmed.
             </span>
           </div>
         </div>
 
         <div class="checkout-card">
-          <div class="section-head">Complete your booking</div>
+          <div class="section-head">Send booking request</div>
 
           <div class="form-grid">
             <div class="double-grid">
@@ -318,30 +318,30 @@
 
             <div class="double-grid">
               <div class="field">
-                <label for="pickupDate">Pickup date</label>
+                <label for="pickupDate">Requested pickup date</label>
                 <input id="pickupDate" type="date" />
               </div>
 
               <div class="field">
-                <label for="returnDate">Return date</label>
+                <label for="returnDate">Expected return date</label>
                 <input id="returnDate" type="date" readonly />
               </div>
             </div>
 
             <div class="double-grid">
               <div class="field">
-                <label for="pickupTime">Pickup time</label>
+                <label for="pickupTime">Requested pickup time</label>
                 <input id="pickupTime" type="time" />
               </div>
 
               <div class="field">
-                <label for="returnTime">Return time</label>
+                <label for="returnTime">Expected return time</label>
                 <input id="returnTime" type="time" readonly />
               </div>
             </div>
 
             <div class="field">
-              <label for="paymentMethod">Payment method</label>
+              <label for="paymentMethod">Preferred payment method</label>
               <select id="paymentMethod">
                 <option>Visa ending in 4242</option>
                 <option>Mastercard ending in 4444</option>
@@ -350,17 +350,17 @@
             </div>
 
             <div class="field">
-              <label for="pickupNote">Optional message to owner</label>
+              <label for="pickupNote">Message to owner</label>
               <input id="pickupNote" type="text" placeholder="e.g. I can pick it up after 11am" />
             </div>
 
             <div class="protection-box">
-              <strong>How protection works</strong>
+              <strong>How this works</strong>
               <ul>
-                <li>Your payment method is stored securely for this booking.</li>
-                <li>A refundable deposit is returned after a successful return.</li>
-                <li>Pickup and return may require photo confirmation.</li>
-                <li>Damage issues are reviewed before any final charge decision.</li>
+                <li>Your request goes to the owner first.</li>
+                <li>Pickup and return dates are based on the rental plan you selected.</li>
+                <li>Deposit and payment should only be processed after owner approval.</li>
+                <li>Pickup and return may require photo confirmation in the live product.</li>
               </ul>
             </div>
 
@@ -372,12 +372,12 @@
             </label>
 
             <div class="checkout-actions">
-              <button class="btn btn-primary" type="button" onclick="confirmBooking()">Confirm booking</button>
+              <button class="btn btn-primary" type="button" onclick="sendBookingRequest()">Send booking request</button>
               <a class="btn btn-secondary" href="./drill.html">Cancel</a>
             </div>
 
             <div class="tiny-note">
-              Demo checkout only — this page previews how booking, deposit, and payment details could appear in the live product.
+              Demo only — this flow shows a request-first rental process where the owner reviews the request before approval.
             </div>
           </div>
         </div>
@@ -412,7 +412,7 @@
     document.getElementById("rentalFee").textContent = `€${activePlan.rental}`;
     document.getElementById("depositFee").textContent = `€${activePlan.deposit}`;
     document.getElementById("serviceFee").textContent = `€${activePlan.service}`;
-    document.getElementById("totalNow").textContent = `€${activePlan.rental + activePlan.deposit + activePlan.service}`;
+    document.getElementById("totalAfterApproval").textContent = `€${activePlan.rental + activePlan.deposit + activePlan.service}`;
     document.getElementById("refundableDeposit").textContent = `€${activePlan.deposit}`;
 
     const pickupDate = document.getElementById("pickupDate");
@@ -420,11 +420,18 @@
     const pickupTime = document.getElementById("pickupTime");
     const returnTime = document.getElementById("returnTime");
 
+    function formatDateToInput(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
     function updateReturnDate() {
       if (!pickupDate.value) return;
       const d = new Date(pickupDate.value);
       d.setDate(d.getDate() + activePlan.days);
-      returnDate.value = d.toISOString().split("T")[0];
+      returnDate.value = formatDateToInput(d);
     }
 
     function updateReturnTime() {
@@ -434,9 +441,10 @@
     pickupDate.addEventListener("change", updateReturnDate);
     pickupTime.addEventListener("change", updateReturnTime);
 
-    function confirmBooking() {
+    function sendBookingRequest() {
       const fullName = document.getElementById("fullName").value;
       const email = document.getElementById("email").value;
+      const pickupNote = document.getElementById("pickupNote").value;
       const termsChecked = document.getElementById("termsCheck").checked;
 
       if (!fullName || !email) {
@@ -454,9 +462,19 @@
         return;
       }
 
-      alert(
-        `Booking submitted for ${activePlan.label}. Pickup: ${pickupDate.value} ${pickupTime.value}. Return: ${returnDate.value} ${returnTime.value}.`
-      );
+      const requestUrl =
+        `./booking-request-sent.html?item=Cordless%20Drill` +
+        `&owner=Anna%20K.` +
+        `&plan=${encodeURIComponent(activePlan.label)}` +
+        `&pickupDate=${encodeURIComponent(pickupDate.value)}` +
+        `&pickupTime=${encodeURIComponent(pickupTime.value)}` +
+        `&returnDate=${encodeURIComponent(returnDate.value)}` +
+        `&returnTime=${encodeURIComponent(returnTime.value)}` +
+        `&deposit=${encodeURIComponent(activePlan.deposit)}` +
+        `&total=${encodeURIComponent(activePlan.rental + activePlan.deposit + activePlan.service)}` +
+        `&note=${encodeURIComponent(pickupNote)}`;
+
+      window.location.href = requestUrl;
     }
   </script>
 </body>
