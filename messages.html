@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages | TakeMine</title>
+  <meta name="description" content="Preview the TakeMine messaging experience." />
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    .messages-page {
+      min-height: 100vh;
+      padding: 40px 0 80px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    .messages-header {
+      margin-bottom: 22px;
+    }
+
+    .messages-title {
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .messages-subtext {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      max-width: 760px;
+    }
+
+    .messages-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .sidebar,
+    .chat-panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .sidebar-top {
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar-title {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .sidebar-note {
+      margin-top: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .conversation {
+      display: block;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .conversation:hover {
+      background: var(--soft);
+    }
+
+    .conversation.active {
+      background: #f8fbff;
+      border-left: 4px solid var(--brand);
+      padding-left: 14px;
+    }
+
+    .conversation-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .conversation-name {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .conversation-time {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .conversation-item {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .conversation-preview {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .conversation-badge {
+      display: inline-flex;
+      margin-top: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .chat-panel {
+      display: flex;
+      flex-direction: column;
+      min-height: 760px;
+    }
+
+    .chat-header {
+      padding: 22px 22px 18px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .chat-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .chat-owner {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .chat-item {
+      font-size: 14px;
+      color: var(--brand);
+      font-weight: 700;
+    }
+
+    .chat-status {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eef6ff;
+      color: var(--brand);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    }
+
+    .day-separator {
+      align-self: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--muted);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .message-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-width: 76%;
+    }
+
+    .message-row.me {
+      align-self: flex-end;
+      text-align: left;
+    }
+
+    .message-row.other {
+      align-self: flex-start;
+    }
+
+    .message-author {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      padding: 0 4px;
+    }
+
+    .message-bubble {
+      padding: 14px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      line-height: 1.7;
+      box-shadow: var(--shadow);
+    }
+
+    .message-row.me .message-bubble {
+      background: var(--brand);
+      color: white;
+      border-top-right-radius: 8px;
+    }
+
+    .message-row.other .message-bubble {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-top-left-radius: 8px;
+    }
+
+    .message-time {
+      font-size: 11px;
+      color: var(--muted);
+      padding: 0 4px;
+    }
+
+    .system-box {
+      margin: 6px 0;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #f8fbff;
+      border: 1px solid #dbeafe;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .system-box strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--brand);
+      margin-bottom: 6px;
+    }
+
+    .chat-input {
+      padding: 16px 18px;
+      border-top: 1px solid var(--line);
+      background: white;
+    }
+
+    .chat-input-inner {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      background: white;
+    }
+
+    .chat-footnote {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 980px) {
+      .messages-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-panel {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .message-row {
+        max-width: 90%;
+      }
+
+      .chat-input-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .chat-input .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="./index.html" class="logo">TakeMine</a>
+
+      <nav class="nav">
+        <a href="./rent.html">Rent</a>
+        <a href="./account.html">Account</a>
+        <a href="./messages.html">Messages</a>
+      </nav>
+
+      <a class="btn btn-primary" href="./account.html">My account</a>
+    </div>
+  </header>
+
+  <main class="messages-page">
+    <div class="container">
+      <div class="messages-header">
+        <h1 class="messages-title">Messages</h1>
+        <p class="messages-subtext">
+          Manage booking requests, confirm pickup details, and stay in touch with owners and renters.
+        </p>
+      </div>
+
+      <div class="messages-grid">
+        <aside class="sidebar">
+          <div class="sidebar-top">
+            <div class="sidebar-title">Inbox</div>
+            <div class="sidebar-note">
+              Your recent booking conversations and rental request updates.
+            </div>
+          </div>
+
+          <div class="conversation active">
+            <div class="conversation-top">
+              <div class="conversation-name">Anna K.</div>
+              <div class="conversation-time">2 min ago</div>
+            </div>
+            <div class="conversation-item">Cordless Drill</div>
+            <div class="conversation-preview">
+              Your 7-day request looks good. I’m available for pickup tomorrow after 11:00.
+            </div>
+            <div class="conversation-badge">Request approved</div>
+          </div>
+
+          <div class="conversation">
+            <div class="conversation-top">
+              <div class="conversation-name">Leon M.</div>
+              <div class="conversation-time">1 hr ago</div>
+            </div>
+            <div class="conversation-item">DSLR Camera</div>
+            <div class="conversation-preview">
+              Thanks for your request. I can confirm weekend pickup after 14:00.
+            </div>
+            <div class="conversation-badge">Awaiting reply</div>
+          </div>
+
+          <div class="conversation">
+            <div class="conversation-top">
+              <div class="conversation-name">Mila S.</div>
+              <div class="conversation-time">Yesterday</div>
+            </div>
+            <div class="conversation-item">Occasion Heels</div>
+            <div class="conversation-preview">
+              Saturday evening works for me. Let me know your shoe size again.
+            </div>
+            <div class="conversation-badge">Pickup discussion</div>
+          </div>
+
+          <div class="conversation">
+            <div class="conversation-top">
+              <div class="conversation-name">TakeMine Support</div>
+              <div class="conversation-time">Yesterday</div>
+            </div>
+            <div class="conversation-item">Protection & deposits</div>
+            <div class="conversation-preview">
+              Your rental request flow and deposit rules are now available in your account.
+            </div>
+            <div class="conversation-badge">System message</div>
+          </div>
+        </aside>
+
+        <section class="chat-panel">
+          <div class="chat-header">
+            <div class="chat-header-left">
+              <div class="chat-owner">Anna K.</div>
+              <div class="chat-item">Cordless Drill • 7-day request</div>
+            </div>
+            <div class="chat-status">Approved by owner</div>
+          </div>
+
+          <div class="chat-body">
+            <div class="day-separator">Today</div>
+
+            <div class="system-box">
+              <strong>Booking request sent</strong>
+              You requested the Cordless Drill for <strong>7 days</strong>. Requested pickup:
+              <strong>2026-03-30 11:00</strong>. Expected return:
+              <strong>2026-04-06 11:00</strong>.
+            </div>
+
+            <div class="message-row me">
+              <div class="message-author">You</div>
+              <div class="message-bubble">
+                Hi Anna, I’d like to rent the drill for 7 days. I can pick it up tomorrow around 11:00 if that works for you.
+              </div>
+              <div class="message-time">10:14</div>
+            </div>
+
+            <div class="message-row other">
+              <div class="message-author">Anna K.</div>
+              <div class="message-bubble">
+                Hi! That works for me. The drill is available and ready for pickup tomorrow after 11:00.
+              </div>
+              <div class="message-time">10:19</div>
+            </div>
+
+            <div class="message-row other">
+              <div class="message-author">Anna K.</div>
+              <div class="message-bubble">
+                I’ll also include the charger and a starter set of drill bits. Please return everything together at the end of the rental.
+              </div>
+              <div class="message-time">10:20</div>
+            </div>
+
+            <div class="message-row me">
+              <div class="message-author">You</div>
+              <div class="message-bubble">
+                Perfect, thank you. 11:00 works well for me. Will payment be processed after approval?
+              </div>
+              <div class="message-time">10:23</div>
+            </div>
+
+            <div class="system-box">
+              <strong>Owner approved your request</strong>
+              Payment should only be processed after approval and before confirmed pickup in the live product.
+              Deposit for this item: <strong>€30</strong>.
+            </div>
+
+            <div class="message-row other">
+              <div class="message-author">Anna K.</div>
+              <div class="message-bubble">
+                Yes, exactly. Once everything is confirmed, you’ll see the final booking in your account. I’ll send you the exact pickup location shortly.
+              </div>
+              <div class="message-time">10:27</div>
+            </div>
+
+            <div class="message-row other">
+              <div class="message-author">Anna K.</div>
+              <div class="message-bubble">
+                Address is near Berlin Mitte station. If anything changes, just message me here.
+              </div>
+              <div class="message-time">10:29</div>
+            </div>
+          </div>
+
+          <div class="chat-input">
+            <div class="chat-input-inner">
+              <input type="text" placeholder="Write a message..." />
+              <button class="btn btn-primary" type="button" onclick="alert('Demo only — message sending is not active yet.')">
+                Send
+              </button>
+            </div>
+            <div class="chat-footnote">
+              Demo inbox only — in the live product, messages would update booking status, pickup details, and approval flow.
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 TakeMine</div>
+      <div class="footer-links">
+        <a href="./index.html">Home</a>
+        <a href="./rent.html">Rentals</a>
+        <a href="./account.html">Account</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
