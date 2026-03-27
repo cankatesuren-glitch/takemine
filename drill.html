@@ -368,6 +368,8 @@
         <a href="./index.html#categories">Categories</a>
         <a href="./index.html#why">Why TakeMine</a>
         <a href="./index.html#faq">FAQ</a>
+        <a href="./account.html">Account</a>
+        <a href="./messages.html">Messages</a>
       </nav>
 
       <a class="btn btn-primary" href="https://tally.so/r/q4OkD7?type=rent" target="_blank" rel="noopener noreferrer">
@@ -412,45 +414,45 @@
           </p>
 
           <div class="detail-owner">
-  <a href="./anna-k.html" class="owner-chip">Anna K.</a>
-  <span class="owner-chip">2 km away</span>
-  <span class="owner-chip">Berlin Mitte</span>
-  <span class="owner-chip">Available tomorrow</span>
-</div>
+            <a href="./anna-k.html" class="owner-chip">Anna K.</a>
+            <span class="owner-chip">2 km away</span>
+            <span class="owner-chip">Berlin Mitte</span>
+            <span class="owner-chip">Available tomorrow</span>
+          </div>
 
           <div class="pricing-box">
             <div class="pricing-title">Choose your rental plan</div>
 
             <div class="pricing-options">
               <label class="pricing-option active">
-                <input type="radio" name="pricing" value="Daily - €9" checked />
+                <input type="radio" name="pricing" value="1" checked />
                 <div class="pricing-left">
-                  <span class="pricing-name">Daily</span>
+                  <span class="pricing-name">1 day</span>
                   <span class="pricing-note">Best for quick DIY jobs</span>
                 </div>
                 <div class="pricing-value">€9</div>
               </label>
 
               <label class="pricing-option">
-                <input type="radio" name="pricing" value="Weekly - €15" />
+                <input type="radio" name="pricing" value="3" />
                 <div class="pricing-left">
-                  <span class="pricing-name">Weekly</span>
-                  <span class="pricing-note">Better value for bigger projects</span>
+                  <span class="pricing-name">3 days</span>
+                  <span class="pricing-note">Better for short projects</span>
                 </div>
                 <div class="pricing-value">€15</div>
               </label>
 
               <label class="pricing-option">
-                <input type="radio" name="pricing" value="Monthly - €30" />
+                <input type="radio" name="pricing" value="7" />
                 <div class="pricing-left">
-                  <span class="pricing-name">Monthly</span>
-                  <span class="pricing-note">For long-term flexibility</span>
+                  <span class="pricing-name">7 days</span>
+                  <span class="pricing-note">Best value for bigger projects</span>
                 </div>
                 <div class="pricing-value">€30</div>
               </label>
 
               <label class="pricing-option" id="offerOption">
-                <input type="radio" name="pricing" value="Offer" />
+                <input type="radio" name="pricing" value="offer" />
                 <div class="pricing-left">
                   <span class="pricing-name">Make an offer</span>
                   <span class="pricing-note">Suggest your own price</span>
@@ -463,9 +465,9 @@
               <div class="offer-field">
                 <label for="offerPeriod">Offer type</label>
                 <select id="offerPeriod">
-                  <option value="Daily">Daily</option>
-                  <option value="Weekly">Weekly</option>
-                  <option value="Monthly">Monthly</option>
+                  <option value="1">1 day</option>
+                  <option value="3">3 days</option>
+                  <option value="7">7 days</option>
                 </select>
               </div>
 
@@ -486,13 +488,13 @@
               </div>
             </div>
 
-            <div class="selected-plan" id="selectedPlanText">Selected plan: Daily - €9</div>
+            <div class="selected-plan" id="selectedPlanText">Selected plan: 1 day - €9</div>
           </div>
 
           <div class="detail-actions">
-            <a class="btn btn-primary" href="./checkout-drill.html">
-  Rent this item
-</a>
+            <a class="btn btn-primary" href="./checkout-drill.html" id="rentButton">
+              Rent this item
+            </a>
             <a class="btn btn-secondary" href="mailto:info@takemine.de?subject=Question%20about%20the%20Cordless%20Drill">
               Ask a question
             </a>
@@ -561,19 +563,36 @@
     const pricingInputs = document.querySelectorAll('input[name="pricing"]');
     const offerBox = document.getElementById('offerBox');
     const selectedPlanText = document.getElementById('selectedPlanText');
+    const rentButton = document.getElementById('rentButton');
+
+    const planMap = {
+      "1": { label: "1 day", price: 9 },
+      "3": { label: "3 days", price: 15 },
+      "7": { label: "7 days", price: 30 }
+    };
+
+    function updateRentButton(planValue) {
+      if (planValue === "offer") {
+        rentButton.href = "./checkout-drill.html?plan=offer";
+        return;
+      }
+      rentButton.href = `./checkout-drill.html?plan=${planValue}`;
+    }
 
     pricingInputs.forEach((input) => {
       input.addEventListener('change', () => {
         pricingOptions.forEach((option) => option.classList.remove('active'));
         input.closest('.pricing-option').classList.add('active');
 
-        if (input.value === 'Offer') {
+        if (input.value === 'offer') {
           offerBox.classList.add('active');
           selectedPlanText.textContent = 'Selected plan: Make an offer';
         } else {
           offerBox.classList.remove('active');
-          selectedPlanText.textContent = `Selected plan: ${input.value}`;
+          selectedPlanText.textContent = `Selected plan: ${planMap[input.value].label} - €${planMap[input.value].price}`;
         }
+
+        updateRentButton(input.value);
       });
     });
 
@@ -587,8 +606,10 @@
         return;
       }
 
-      alert(`Offer sent: ${period} - €${price}${note ? ' | Note: ' + note : ''}`);
+      alert(`Offer sent: ${period} day(s) - €${price}${note ? ' | Note: ' + note : ''}`);
     }
+
+    updateRentButton("1");
   </script>
 </body>
 </html>
