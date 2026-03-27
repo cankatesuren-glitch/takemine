@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Request Sent | TakeMine</title>
+  <meta name="description" content="Your booking request has been sent on TakeMine." />
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    .success-page {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      padding: 60px 0 100px;
+    }
+
+    .success-card {
+      max-width: 760px;
+      margin: 0 auto;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      box-shadow: var(--shadow-strong);
+      padding: 36px;
+    }
+
+    .success-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+      color: white;
+    }
+
+    .success-title {
+      margin-top: 20px;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--text);
+    }
+
+    .success-text {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      max-width: 640px;
+    }
+
+    .success-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .info-box {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px;
+      background: #fcfdff;
+    }
+
+    .info-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .info-value {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .notice-box {
+      margin-top: 24px;
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: white;
+    }
+
+    .notice-box strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .notice-box span {
+      display: block;
+      margin-top: 8px;
+      color: #dbeafe;
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tiny-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 760px) {
+      .success-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="./index.html" class="logo">TakeMine</a>
+
+      <nav class="nav">
+        <a href="./rent.html">Rent</a>
+        <a href="./account.html">Account</a>
+        <a href="./messages.html">Messages</a>
+      </nav>
+
+      <a class="btn btn-primary" href="./account.html">My account</a>
+    </div>
+  </header>
+
+  <main class="success-page">
+    <div class="container">
+      <div class="success-card">
+        <div class="success-badge">✓</div>
+
+        <div class="success-title">Booking request sent</div>
+        <div class="success-text" id="successText">
+          Your booking request has been sent to the owner.
+        </div>
+
+        <div class="success-grid">
+          <div class="info-box">
+            <div class="info-label">Item</div>
+            <div class="info-value" id="itemValue">Cordless Drill</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Owner</div>
+            <div class="info-value" id="ownerValue">Anna K.</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Requested plan</div>
+            <div class="info-value" id="planValue">1 day</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Pickup</div>
+            <div class="info-value" id="pickupValue">-</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Return</div>
+            <div class="info-value" id="returnValue">-</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Total after approval</div>
+            <div class="info-value" id="totalValue">€40</div>
+          </div>
+        </div>
+
+        <div class="notice-box">
+          <strong>What happens next</strong>
+          <span>
+            The owner will review your request and reply in messages. Payment should only be processed
+            after the owner accepts the booking and final pickup details are confirmed.
+          </span>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="./messages.html">Go to messages</a>
+          <a class="btn btn-secondary" href="./account.html">View my account</a>
+          <a class="btn btn-secondary" href="./rent.html">Back to rentals</a>
+        </div>
+
+        <div class="tiny-note" id="noteLine"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 TakeMine</div>
+      <div class="footer-links">
+        <a href="./index.html">Home</a>
+        <a href="./rent.html">Rentals</a>
+        <a href="./account.html">Account</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    const item = params.get("item") || "Cordless Drill";
+    const owner = params.get("owner") || "Anna K.";
+    const plan = params.get("plan") || "1 day";
+    const pickupDate = params.get("pickupDate") || "-";
+    const pickupTime = params.get("pickupTime") || "-";
+    const returnDate = params.get("returnDate") || "-";
+    const returnTime = params.get("returnTime") || "-";
+    const total = params.get("total") || "40";
+    const note = params.get("note") || "";
+
+    document.getElementById("successText").textContent =
+      `Your booking request for ${item} has been sent to ${owner}.`;
+
+    document.getElementById("itemValue").textContent = item;
+    document.getElementById("ownerValue").textContent = owner;
+    document.getElementById("planValue").textContent = plan;
+    document.getElementById("pickupValue").textContent = `${pickupDate} ${pickupTime}`;
+    document.getElementById("returnValue").textContent = `${returnDate} ${returnTime}`;
+    document.getElementById("totalValue").textContent = `€${total}`;
+
+    if (note) {
+      document.getElementById("noteLine").textContent = `Your message to the owner: "${note}"`;
+    }
+  </script>
+</body>
+</html>
